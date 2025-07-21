@@ -11,7 +11,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            /* Subtle diagonal gradient background */
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             color: #1e293b;
         }
         .section-title {
@@ -37,30 +38,56 @@
             margin-right: auto;
             color: #475569;
         }
+        /* Player Card Details Transition */
         .player-card .details {
             transition: all 0.3s ease-in-out;
         }
+        /* Navigation Link Hover Effect (improved) */
         .nav-link {
-            transition: color 0.2s ease-in-out;
+            transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
         }
         .nav-link:hover {
             color: #f59e0b;
+            transform: translateY(-2px); /* Slight lift on hover */
         }
         .active-nav {
             color: #f59e0b;
             font-weight: 600;
         }
+        /* Record Card Interactive Hover Effect (retained) */
         .record-card-interactive {
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; /* Added border-color */
         }
         .record-card-interactive:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            border-color: #f59e0b; /* Highlight border on hover */
+        }
+
+        /* Button Hover Effects (enhanced) */
+        .cta-button {
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Fade-in-on-Scroll Animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="text-slate-800">
 
 <header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -76,7 +103,7 @@
             <a href="#content" class="nav-link text-slate-600 font-medium">Content</a>
             <a href="#vision" class="nav-link text-slate-600 font-medium">Vision</a>
         </div>
-        <a href="mailto:ciampichiniluca@gmail.com" class="hidden md:block bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors">
+        <a href="mailto:ciampichiniluca@gmail.com" class="hidden md:block bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">
             Contact Us
         </a>
         <div id="mobile-menu-button" class="md:hidden cursor-pointer">
@@ -89,27 +116,27 @@
         <a href="#content" class="block text-center py-2 px-4 text-slate-600 hover:bg-slate-100">Content</a>
         <a href="#vision" class="block text-center py-2 px-4 text-slate-600 hover:bg-slate-100">Vision</a>
         <div class="p-4">
-            <a href="mailto:ciampichiniluca@gmail.com" class="w-full block text-center bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors">Contact Us</a>
+            <a href="mailto:ciampichiniluca@gmail.com" class="w-full block text-center bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">Contact Us</a>
         </div>
     </div>
 </header>
 
 <main>
-    <section id="hero" class="py-20 md:py-32">
+    <section id="hero" class="py-20 md:py-32 fade-in-section">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight">Vatican eSport: Your Next Champions in <span class="text-amber-500">The Finals</span></h2>
             <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-600">
                 We are a top-tier, battle-hardened roster with proven LAN experience and a relentless drive to win. With our sights set on The Finals' competitive scene, we are seeking a partnership with an ambitious organization to take us to the next level.
             </p>
             <div class="mt-10 flex justify-center items-center gap-4">
-                <a href="#record" class="bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-900 transition-colors">
+                <a href="#record" class="bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-900 transition-colors cta-button">
                     View Our Record
                 </a>
             </div>
         </div>
     </section>
     
-    <section id="roster" class="py-20 bg-white">
+    <section id="roster" class="py-20 bg-white fade-in-section">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h3 class="section-title text-slate-900">Meet the Roster</h3>
@@ -155,7 +182,7 @@
         </div>
     </section>
 
-    <section id="record" class="py-20 bg-slate-100">
+    <section id="record" class="py-20 bg-slate-100 fade-in-section">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h3 class="section-title text-slate-900">Competitive Record</h3>
@@ -193,7 +220,7 @@
         </div>
     </section>
 
-    <section id="content" class="py-20 bg-white">
+    <section id="content" class="py-20 bg-white fade-in-section">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h3 class="section-title text-slate-900">Content & Community Reach</h3>
@@ -206,7 +233,7 @@
                     <div class="text-5xl mb-4"></div>
                     <h4 class="text-2xl font-bold">Evoluti0N on Twitch</h4>
                     <p class="text-slate-600 my-2 flex-grow">Equipped for high-quality streaming with a dual PC setup. Open to streaming on other platforms as needed to support our partners.</p>
-                    <a href="https://www.twitch.tv/evoluti0n_gaming" target="_blank" class="mt-4 bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors">
+                    <a href="https://www.twitch.tv/evoluti0n_gaming" target="_blank" class="mt-4 bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">
                         Visit Twitch Channel
                     </a>
                 </div>
@@ -215,10 +242,10 @@
                     <h4 class="text-2xl font-bold">Ireleezi's Content</h4>
                     <p class="text-slate-600 my-2 flex-grow">Engaging with the community through streaming and short-form content.</p>
                     <div class="mt-4 flex gap-4">
-                        <a href="https://www.twitch.tv/ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors">
+                        <a href="https://www.twitch.tv/ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">
                             Twitch
                         </a>
-                        <a href="https://www.tiktok.com/@ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors">
+                        <a href="https://www.tiktok.com/@ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">
                             TikTok
                         </a>
                     </div>
@@ -227,7 +254,7 @@
         </div>
     </section>
 
-    <section id="vision" class="py-20 bg-slate-100">
+    <section id="vision" class="py-20 bg-slate-100 fade-in-section">
         <div class="container mx-auto px-6 text-center">
             <h3 class="section-title text-slate-900">Our Commitment to The Finals Esports</h3>
             <div class="section-intro mt-4 text-left mx-auto">
@@ -253,10 +280,10 @@
         <h4 class="text-2xl md:text-3xl font-bold">Ready to Build a Winning Legacy?</h4>
         <p class="mt-4 max-w-2xl mx-auto text-slate-300">We have the skill, the experience, and the ambition. Let's discuss how our team can represent your brand and achieve greatness together. Contact us via email or reach out to our team members on Discord for direct communication.</p>
         <div class="mt-8 flex justify-center gap-4">
-            <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-amber-400 transition-colors">
+            <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-amber-400 transition-colors cta-button">
                 Email Us
             </a>
-            <a href="https://twitter.com/Evoluti0N_FN" target="_blank" class="bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors">
+            <a href="https://twitter.com/Evoluti0N_FN" target="_blank" class="bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors cta-button">
                 Evoluti0N's Twitter
             </a>
         </div>
@@ -340,6 +367,22 @@
 
         sections.forEach(section => {
             observer.observe(section);
+        });
+
+        // Fade-in-on-Scroll Implementation
+        const fadeSections = document.querySelectorAll('.fade-in-section');
+
+        const fadeObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
+
+        fadeSections.forEach(section => {
+            fadeObserver.observe(section);
         });
 
         const modal = document.getElementById('proof-modal');
