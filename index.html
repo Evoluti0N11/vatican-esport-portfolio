@@ -154,7 +154,7 @@
                         <p><strong>Role:</strong> Team Captain & Strategist</p>
                         <p><strong>Nationality:</strong> 🇮🇹 Italian</p>
                         <p><strong>Age:</strong> 24</p>
-                        <p><strong>Background:</strong> Extensive LAN experience in CS:GO and Halo Infinite. Competed in the Madrid LAN and Belgium LAN (securing 1st place). Also participated in ESEA Intermediate playoffs in CSGO. Active in The Finals since Open Beta.</p>
+                        <p><strong>Background:</strong> Extensive LAN experience in CS:GO and Halo Infinite, including a significant LAN event in **Italy** where he placed 1st (<a href="https://x.com/Evoluti0N11/status/1145628235323117570" target="_blank" class="text-blue-500 hover:underline">proof</a>). Also competed in the Madrid LAN and Belgium LAN (securing 1st place), and qualified 1st in the CS:GO Predator League Qualifier Sweden (<a href="https://x.com/RisenWarriorsgg/status/1315347329034190852" target="_blank" class="text-blue-500 hover:underline">details</a>). Participated in ESEA Intermediate playoffs in CSGO. Active in The Finals since Open Beta.</p>
                         <p><strong>Discord:</strong> evoluti0n11</p>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                         <p><strong>Role:</strong> Versatile Fragger</p>
                         <p><strong>Nationality:</strong> 🇮🇪 Irish</p>
                         <p><strong>Age:</strong> 22</p>
-                        <p><strong>Background:</strong> Proven competitor in Halo Infinite with LAN experience, notably at the Europa Halo Blackpool 2023 (<a href="https://liquipedia.net/halo/Europa_Halo/Blackpool/2023" target="_blank" class="text-blue-500">details</a>). Playing The Finals since Open Beta.</p>
+                        <p><strong>Background:</strong> Proven competitor in Halo Infinite with LAN experience, notably at the Europa Halo Blackpool 2023 (<a href="https://liquipedia.net/halo/Europa_Halo/Blackpool/2023" target="_blank" class="text-blue-500 hover:underline">details</a>). Playing The Finals since Open Beta.</p>
                         <p><strong>Discord:</strong> ireleezi</p>
                     </div>
                 </div>
@@ -323,16 +323,21 @@
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
+        // Toggle mobile menu visibility
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
+        // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // Exclude links within the mobile menu, as they are handled separately or can close the menu
             if (!anchor.closest('#mobile-menu')) {
                 anchor.addEventListener('click', function (e) {
-                    if(this.getAttribute('href').length > 1) {
+                    // Only prevent default if it's a valid section ID, not just a '#'
+                    if (this.getAttribute('href').length > 1) {
                         e.preventDefault();
-                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        const targetId = this.getAttribute('href');
+                        document.querySelector(targetId).scrollIntoView({
                             behavior: 'smooth'
                         });
                     }
@@ -340,50 +345,55 @@
             }
         });
 
+        // Player card details toggle
         const playerCards = document.querySelectorAll('.player-card');
         playerCards.forEach(card => {
             card.addEventListener('click', () => {
                 const details = card.querySelector('.details');
                 const isExpanded = details.style.height !== '0px';
                 
+                // Collapse all other player cards
                 document.querySelectorAll('.player-card .details').forEach(d => {
                     d.style.height = '0px';
-                    d.style.marginTop = '0';
+                    d.style.marginTop = '0'; // Reset margin
                 });
 
+                // Expand clicked card if it was not already expanded
                 if (!isExpanded) {
                     details.style.height = details.scrollHeight + 'px';
-                    details.style.marginTop = '1rem';
+                    details.style.marginTop = '1rem'; // Add margin when expanded
                 }
             });
         });
 
+        // Active navigation link highlighting based on scroll position
         const sections = document.querySelectorAll('main section');
         const navLinks = document.querySelectorAll('header nav a');
 
-        const options = {
-            rootMargin: '-50% 0px -50% 0px',
-            threshold: 0
+        const observerOptions = {
+            rootMargin: '-50% 0px -50% 0px', // When the middle of the section is in view
+            threshold: 0 // As soon as any part of the section is visible
         };
         
-        const observer = new IntersectionObserver((entries, observer) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
                     navLinks.forEach(link => {
                         link.classList.remove('active-nav');
-                        // Correctly map nav links to new section IDs
-                        let targetId = link.getAttribute('href').substring(1);
-                        if (id === targetId || (id === 'our-commitment' && targetId === 'the-finals-esports')) { 
-                             link.classList.add('active-nav');
+                        // Match nav link href with section ID
+                        if (link.getAttribute('href') === `#${id}`) {
+                            requestAnimationFrame(() => { // Use rAF for smoother class toggling
+                                link.classList.add('active-nav');
+                            });
                         }
                     });
                 }
             });
-        }, options);
+        }, observerOptions);
 
         sections.forEach(section => {
-            observer.observe(section);
+            sectionObserver.observe(section);
         });
 
         // Fade-in-on-Scroll Implementation
@@ -402,7 +412,8 @@
             fadeObserver.observe(section);
         });
 
-        const modal = document.getElementById('proof-modal');
+        // Image proof modal functionality
+        const proofModal = document.getElementById('proof-modal');
         const modalImage = document.getElementById('modal-image');
         const closeModalButton = document.getElementById('modal-close-button');
         const interactiveCards = document.querySelectorAll('.record-card-interactive');
@@ -410,25 +421,29 @@
         interactiveCards.forEach(card => {
             card.addEventListener('click', () => {
                 const imgSrc = card.getAttribute('data-img-src');
-                if (imgSrc && imgSrc !== 'https://i.imgur.com/placeholder.png') {
+                if (imgSrc && imgSrc !== 'https://i.imgur.com/placeholder.png') { // Check for valid image source
                     modalImage.src = imgSrc;
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
+                    proofModal.classList.remove('hidden');
+                    proofModal.classList.add('flex'); // Show modal
                 } else if (imgSrc === 'https://i.imgur.com/placeholder.png') {
                     alert('Image proof for this achievement will be added soon.');
                 }
             });
         });
 
+        // Function to close the modal
         const closeModal = () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            modalImage.src = ''; 
+            proofModal.classList.add('hidden');
+            proofModal.classList.remove('flex');
+            modalImage.src = ''; // Clear image source
         };
 
+        // Close modal when close button is clicked
         closeModalButton.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
+        
+        // Close modal when clicking outside the image
+        proofModal.addEventListener('click', (e) => {
+            if (e.target === proofModal) { // Check if the click was directly on the overlay
                 closeModal();
             }
         });
