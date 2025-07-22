@@ -429,25 +429,23 @@
         playerCards.forEach(card => {
             const details = card.querySelector('.details');
             
-            // --- FIX FOR INITIAL SCROLLHEIGHT BUG ---
-            // Force a reflow to ensure accurate scrollHeight on initial load
-            details.style.height = 'auto'; 
-            details.offsetHeight; // Forces a reflow/recalculation
-            details.style.height = '0px'; // Revert to initial hidden state
-            // --- END FIX ---
+            // Initial setup: ensure details are hidden and margin is 0
+            details.style.height = '0px'; 
+            details.style.marginTop = '0'; // Ensure initial state
 
             card.addEventListener('click', () => {
-                const isExpanded = details.style.height !== '0px';
+                // Check if the current card's details are visible (height > 0 and not explicitly 0px)
+                const isExpanded = details.scrollHeight > 0 && details.style.height !== '0px';
                 
-                // Collapse all other player cards ONLY IF THEY ARE CURRENTLY EXPANDED
-                document.querySelectorAll('.player-card .details').forEach(d => {
-                    if (d !== details && d.style.height !== '0px') { // Check if it's a different card AND it's currently open
-                        d.style.height = '0px';
-                        d.style.marginTop = '0'; // Reset margin
+                // Collapse all other player cards
+                document.querySelectorAll('.player-card .details').forEach(otherDetails => {
+                    if (otherDetails !== details) { // Don't collapse the clicked card
+                        otherDetails.style.height = '0px';
+                        otherDetails.style.marginTop = '0';
                     }
                 });
 
-                // Expand clicked card if it was not already expanded
+                // Toggle the clicked card
                 if (!isExpanded) {
                     details.style.height = details.scrollHeight + 'px';
                     details.style.marginTop = '1rem'; // Add margin when expanded
@@ -458,6 +456,7 @@
                 }
             });
         });
+
 
         // Active navigation link highlighting based on scroll position
         const sections = document.querySelectorAll('main section');
@@ -518,7 +517,7 @@
                     modalImage.src = imgSrc;
                     proofModal.classList.remove('hidden');
                     proofModal.classList.add('flex'); // Show modal
-                } else if (imgSrc === 'https://i.imgur.com/placeholder.png') {
+                } else if (imgSrc === 'https://i.imgur.com.com/placeholder.png') { // Corrected this line to match the alert for placeholder
                     alert('Image proof for this achievement will be added soon.');
                 }
             });
