@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -85,6 +86,75 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* The Finals Background Section with Video */
+        #the-finals-esports {
+            position: relative;
+            overflow: hidden;
+            color: white; /* Ensure text is readable on dark background */
+        }
+
+        /* Styling for the YouTube iframe */
+        #the-finals-esports iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* These dimensions are key for covering the entire background */
+            min-width: 100%;
+            min-height: 100%;
+            width: 100vw; /* Ensure it covers viewport width */
+            height: 56.25vw; /* 16:9 aspect ratio (9/16 * 100vw) */
+            
+            /* If the viewport is taller than 16:9, ensure vertical coverage */
+            /* This makes the video scale to cover the shorter dimension first */
+            @media (min-aspect-ratio: 16/9) {
+                height: 56.25vw; /* Height is determined by width */
+            }
+            @media (max-aspect-ratio: 16/9) {
+                width: 177.78vh; /* Width is determined by height (16/9 * 100vh) */
+            }
+            
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            /* Ensure the video covers the entire container, even if it scales unevenly */
+            object-fit: cover; /* This property primarily affects video elements, not iframes directly, but good to have if you switch */
+            pointer-events: none; /* Prevent clicks on the iframe itself */
+        }
+
+        /* Dark overlay for readability */
+        #the-finals-esports::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            z-index: 1;
+        }
+
+        #the-finals-esports .container {
+            position: relative;
+            z-index: 2; /* Bring content above overlay */
+        }
+
+        #the-finals-esports .section-title,
+        #the-finals-esports .section-intro {
+            color: white; /* Ensure text is white */
+        }
+
+        #the-finals-esports .section-title::after {
+            background-color: #f59e0b; /* Keep accent color */
+        }
+
+        /* Adjust link color in The Finals section for contrast */
+        #the-finals-esports a {
+            color: #8ac0ff; /* Lighter blue for better contrast */
+        }
+        #the-finals-esports a:hover {
+            color: #b0d0ff;
+        }
+
     </style>
 </head>
 <body class="text-slate-800">
@@ -232,7 +302,7 @@
             </div>
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 flex flex-col items-center text-center">
-                    <div class="text-5xl mb-4"></div>
+                    <div class="text-5xl mb-4 text-amber-500"><i class="fas fa-tv"></i></div>
                     <h4 class="text-2xl font-bold">Evoluti0N on Twitch</h4>
                     <p class="text-slate-600 my-2 flex-grow">Equipped for high-quality streaming with a dual PC setup. Open to streaming on other platforms as needed to support our partners.</p>
                     <a href="https://www.twitch.tv/evoluti0n11" target="_blank" class="mt-4 bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">
@@ -240,7 +310,7 @@
                     </a>
                 </div>
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 flex flex-col items-center text-center">
-                    <div class="text-5xl mb-4"></div>
+                    <div class="text-5xl mb-4 text-amber-500"><i class="fas fa-headset"></i></div>
                     <h4 class="text-2xl font-bold">Ireleezi's Content</h4>
                     <p class="text-slate-600 my-2 flex-grow">Engaging with the community through streaming and short-form content.</p>
                     <div class="mt-4 flex gap-4">
@@ -256,18 +326,27 @@
         </div>
     </section>
 
-    <section id="the-finals-esports" class="py-20 bg-slate-100 fade-in-section">
+    <section id="the-finals-esports" class="py-20 fade-in-section">
+        <iframe 
+            src="https://www.youtube.com/embed/RFlxLo5GJMo?autoplay=1&mute=1&loop=1&playlist=RFlxLo5GJMo&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
         <div class="container mx-auto px-6 text-center">
-            <h3 class="section-title text-slate-900">The Finals: The Future of Esports</h3>
+            <h3 class="section-title">The Finals: The Future of Esports</h3>
             <div class="section-intro mt-4 text-left mx-auto">
                 <p class="mb-4">
-                    <a href="https://www.reachthefinals.com/" target="_blank" class="text-blue-500 hover:underline font-semibold"><strong>The Finals</strong></a> is rapidly redefining the esports landscape with its unique blend of dynamic gameplay and fully destructible environments. This innovative approach offers unparalleled competitive depth and spectator appeal, setting it apart in the FPS genre.
+                    <a href="https://www.reachthefinals.com/" target="_blank" class="font-semibold"><strong>The Finals</strong></a> is rapidly redefining the esports landscape with its unique blend of dynamic gameplay and fully destructible environments. This innovative approach offers unparalleled competitive depth and spectator appeal, setting it apart in the FPS genre.
                 </p>
                 <p class="mb-4">
-                    The game's competitive scene is experiencing incredible growth, highlighted by significant developments like the upcoming <strong>official Major tournament in 2025</strong>. This highly anticipated event boasts a substantial <strong>$100,000 prize pool</strong> and will commence with open qualifiers in August, culminating in a grand final at <strong>DreamHack Stockholm in November</strong>. For more in-depth details on this exciting journey, visit <a href="https://www.reachthefinals.com/major25" target="_blank" class="text-blue-500 hover:underline font-semibold">The Finals Major page</a> and review their <a href="https://www.reachthefinals.com/patchnotes/rte1" target="_blank" class="text-blue-500 hover:underline font-semibold">Road to Esports Part 1</a> and <a href="https://www.reachthefinals.com/patchnotes/rte2" target="_blank" class="text-blue-500 hover:underline font-semibold">Part 2</a> patch notes.
+                    The game's competitive scene is experiencing incredible growth, highlighted by significant developments like the upcoming <strong>official Major tournament in 2025</strong>. This highly anticipated event boasts a substantial <strong>$100,000 prize pool</strong> and will commence with open qualifiers in August, culminating in a grand final at <strong>DreamHack Stockholm in November</strong>. For more in-depth details on this exciting journey, visit <a href="https://www.reachthefinals.com/major25" target="_blank" class="font-semibold">The Finals Major page</a> and review their <a href="https://www.reachthefinals.com/patchnotes/rte1" target="_blank" class="font-semibold">Road to Esports Part 1</a> and <a href="https://www.reachthefinals.com/patchnotes/rte2" target="_blank" class="font-semibold">Part 2</a> patch notes.
                 </p>
                 <p class="mb-4">
-                    Furthermore, strategic partnerships with established esports organizations, such as <a href="https://twitter.com/Spacestation/status/1939749642297909304" target="_blank" class="text-blue-500 hover:underline font-semibold">Space Station Gaming (SSG)</a>, are crucial in solidifying <strong>The Finals</strong> position as a premier esport. These collaborations attract top-tier talent, boost viewership, and significantly increase the game's overall visibility within the competitive gaming world.
+                    Furthermore, strategic partnerships with established esports organizations, such as <a href="https://twitter.com/Spacestation/status/1939749642297909304" target="_blank" class="font-semibold">Space Station Gaming (SSG)</a>, are crucial in solidifying <strong>The Finals'</strong> position as a premier esport. These collaborations attract top-tier talent, boost viewership, and significantly increase the game's overall visibility within the competitive gaming world.
+                </p>
+                <p class="text-sm italic mt-8 text-slate-300">
+                    Background video: "<a href="https://www.youtube.com/watch?v=RFlxLo5GJMo" target="_blank" class="underline">The Finals Official Reveal Trailer</a>" by THE FINALS. All rights reserved by Embark Studios.
                 </p>
             </div>
         </div>
@@ -352,8 +431,6 @@
             
             // --- FIX FOR INITIAL SCROLLHEIGHT BUG ---
             // Force a reflow to ensure accurate scrollHeight on initial load
-            // Briefly set height to auto and read offsetHeight, then revert.
-            // This ensures the browser calculates its true height after CSS is applied.
             details.style.height = 'auto'; 
             details.offsetHeight; // Forces a reflow/recalculation
             details.style.height = '0px'; // Revert to initial hidden state
@@ -362,9 +439,9 @@
             card.addEventListener('click', () => {
                 const isExpanded = details.style.height !== '0px';
                 
-                // Collapse all other player cards
+                // Collapse all other player cards ONLY IF THEY ARE CURRENTLY EXPANDED
                 document.querySelectorAll('.player-card .details').forEach(d => {
-                    if (d !== details) { // Don't collapse the current one yet
+                    if (d !== details && d.style.height !== '0px') { // Check if it's a different card AND it's currently open
                         d.style.height = '0px';
                         d.style.marginTop = '0'; // Reset margin
                     }
