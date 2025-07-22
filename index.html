@@ -17,6 +17,19 @@
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             color: #1e293b; /* Slightly darker default text for better readability */
         }
+
+        /* Custom Cursor (New Enhancement) */
+        html {
+            cursor: url('https://i.imgur.com/K1Lg5Qd.png'), auto; /* Default cursor (crosshair-like placeholder) */
+        }
+        a, button, .cursor-pointer, .player-card, .record-card-interactive {
+            cursor: url('https://i.imgur.com/h5TzG1H.png'), pointer; /* Pointer cursor (finger-like placeholder) */
+        }
+        /* Fallback for browsers that don't support custom cursors or if image fails */
+        a, button, .cursor-pointer, .player-card, .record-card-interactive {
+            cursor: pointer;
+        }
+
         .section-title {
             font-weight: 900;
             font-size: 2.25rem;
@@ -33,10 +46,10 @@
             width: 5rem;
             height: 0.25rem;
             background-color: #f59e0b;
-            /* New: Animation for underline */
+            /* Animation for underline on hover (New Enhancement) */
             transition: width 0.3s ease, background-color 0.3s ease;
         }
-        /* New: Section Title Underline Hover Effect */
+        /* Section Title Underline Hover Effect (New Enhancement) */
         .section-title:hover::after {
             width: 6rem; /* Slightly wider on hover */
             background-color: #d97706; /* Slightly darker amber */
@@ -51,6 +64,11 @@
         /* Player Card Details Transition */
         .player-card .details {
             transition: all 0.3s ease-in-out;
+        }
+        /* Player Card Hover Effect (Refined) */
+        .player-card:hover {
+            transform: translateY(-4px); /* Slight lift */
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* More pronounced shadow */
         }
         /* Navigation Link Hover Effect (improved) */
         .nav-link {
@@ -74,11 +92,11 @@
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
             border-color: #f59e0b; /* Highlight border on hover */
         }
-        /* New: "View Proof" Link Hover Effect */
-        .record-card-interactive .text-amber-600 {
+        /* "View Proof" Link Hover Effect (New Enhancement) */
+        .record-card-interactive .proof-link {
             transition: color 0.2s ease, text-decoration 0.2s ease;
         }
-        .record-card-interactive .text-amber-600:hover {
+        .record-card-interactive .proof-link:hover {
             color: #d97706; /* Darker amber on hover */
             text-decoration: underline; /* Underline on hover */
         }
@@ -103,6 +121,20 @@
         .fade-in-section.is-visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Custom Keyframes for Hero Text Animation (New Enhancement) */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-hero-title {
+            animation: slideInUp 1s ease-out forwards;
+        }
+        .animate-hero-subtitle {
+            animation: slideInUp 1s ease-out forwards;
+            animation-delay: 0.3s; /* Delay for secondary text */
+            opacity: 0; /* Start hidden */
         }
 
         /* The Finals Background Section with Video */
@@ -160,6 +192,11 @@
         #the-finals-esports .section-intro {
             color: white; /* Ensure text is white */
         }
+        /* Text Shadow for Readability over Video (New Enhancement) */
+        #the-finals-esports .section-title,
+        #the-finals-esports .section-intro p {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9); /* Subtle shadow for readability */
+        }
 
         #the-finals-esports .section-title::after {
             background-color: #f59e0b; /* Keep accent color */
@@ -178,9 +215,25 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Stronger shadow for modal */
         }
 
+        /* Scroll Progress Bar (New Enhancement) */
+        #progressBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background-color: #f59e0b;
+            z-index: 1000;
+            transition: width 0.1s linear;
+        }
+
     </style>
 </head>
-<body class="text-slate-900"> <header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+<body class="text-slate-900">
+
+<div id="progressBar"></div>
+
+<header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
         <a href="#hero" class="flex items-center gap-3">
             <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" alt="Team Logo" class="h-10 w-10 rounded-full">
@@ -219,8 +272,8 @@
 <main>
     <section id="hero" class="py-20 md:py-32 fade-in-section">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight">Vatican eSport: <span class="text-amber-500">Elite Roster</span></h2>
-            <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-600">
+            <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight animate-hero-title">Vatican eSport: <span class="text-amber-500">Elite Roster</span></h2>
+            <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-600 animate-hero-subtitle">
                 We are a top-tier, battle-hardened roster with proven LAN experience and a relentless drive to win. With our sights set on The Finals' competitive scene, we are seeking a partnership with an ambitious organization to take us to the next level.
             </p>
             <div class="mt-10 flex justify-center items-center gap-4">
@@ -287,26 +340,26 @@
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="record-card-interactive bg-white rounded-xl p-6 text-center border border-slate-200" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/image.png?raw=true">
-                    <p class="text-6xl font-black text-amber-500">3<span class="text-4xl">rd</span></p>
+                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-trophy text-5xl"></i> 3<span class="text-4xl">rd</span></p>
                     <h5 class="font-bold mt-2">CIS League #4</h5>
                     <p class="text-sm text-slate-500">First team tournament</p>
-                    <span class="text-amber-600 text-sm font-semibold mt-3 inline-block hover:underline hover:text-amber-700">View Proof →</span>
+                    <span class="proof-link text-amber-600 text-sm font-semibold mt-3 inline-block">View Proof →</span>
                 </div>
                 <div class="record-card-interactive bg-white rounded-xl p-6 text-center border border-slate-200" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">
-                    <p class="text-6xl font-black text-amber-500">3<span class="text-4xl">rd</span></p>
+                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-medal text-5xl"></i> 3<span class="text-4xl">rd</span></p>
                     <h5 class="font-bold mt-2">ProHubs S1 Qualifiers</h5>
                     <p class="text-sm text-slate-500">Result from official site</p>
-                    <span class="text-amber-600 text-sm font-semibold mt-3 inline-block hover:underline hover:text-amber-700">View Proof →</span>
+                    <span class="proof-link text-amber-600 text-sm font-semibold mt-3 inline-block">View Proof →</span>
                     <a href="https://prohubs.tf/phl/season-1/qualifiers/eu" target="_blank" class="text-blue-500 text-sm font-semibold mt-2 inline-block">Visit Qualifier Website →</a>
                 </div>
                 <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm">
-                    <p class="text-6xl font-black text-amber-500">T8/9</p>
+                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-chart-line text-5xl"></i> T8/9</p>
                     <h5 class="font-bold mt-2">ProHubs S1 League Play</h5>
                     <p class="text-sm text-slate-500">Current placing with stand-in</p>
                     <a href="https://liquipedia.net/lab/Thefinals/ProHubs.TF/S1/Europe" target="_blank" class="text-amber-600 hover:text-amber-700 text-sm font-semibold mt-3 inline-block">View on Liquipedia →</a>
                 </div>
                 <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm">
-                    <p class="text-6xl font-black text-amber-500">Top 200</p>
+                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-globe text-5xl"></i> Top 200</p>
                     <h5 class="font-bold mt-2">Global Ranked Placements</h5>
                     <p class="text-sm text-slate-500">Our core members consistently achieve top-tier global rankings. While university and work commitments limit consistent top 70 placement, our individual skill is verifiable on official leaderboards (search: Evoluti0N, Ireleezi, UwU).</p>
                     <a href="https://id.embark.games/the-finals/leaderboards/s7" target="_blank" class="text-amber-600 hover:text-amber-700 text-sm font-semibold mt-3 inline-block">View Leaderboard →</a>
@@ -380,10 +433,10 @@
             <h3 class="section-title text-slate-900">Our Commitment & Readiness</h3>
             <div class="section-intro mt-4 text-left mx-auto">
                 <p class="mb-4">
-                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team has a <strong>proven track record</strong>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a stand-in, as our third player is unable to participate due to equipment limitations while on holiday (Xbox Series S & TV setup).
+                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team has a <span class="text-amber-500 font-bold"><i class="fas fa-check-circle mr-1"></i> proven track record</span>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a stand-in, as our third player is unable to participate due to equipment limitations while on holiday (Xbox Series S & TV setup).
                 </p>
                 <p class="mb-4">
-                    Despite our university commitments, we consistently dedicate significant time to intensive training, scrims, and meticulous preparation for upcoming tournaments, including the highly anticipated <strong>Major Qualifiers around late August and early September</strong>. Our full, formidable lineup will be back together and actively scrimming starting <strong>August 16th</strong>, ready to push for top placements.
+                    Despite our university commitments, we consistently dedicate significant time to <span class="text-amber-500 font-bold"><i class="fas fa-check-circle mr-1"></i> intensive training, scrims, and meticulous preparation</span> for upcoming tournaments, including the highly anticipated <strong>Major Qualifiers around late August and early September</strong>. Our full, formidable lineup will be back together and actively scrimming starting <strong>August 16th</strong>, ready to push for top placements.
                 </p>
                 <p class="mb-4">
                     Our ultimate goal is to proudly represent a forward-thinking organization and establish ourselves as a leading force in <strong>The Finals</strong> competitive scene. With our relentless drive, combined with a deep understanding of the game and strategic teamwork, we are ready to embrace every challenge and achieve greatness together.
@@ -428,7 +481,16 @@
     document.addEventListener('DOMContentLoaded', () => {
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+        const heroTitle = document.querySelector('.animate-hero-title');
+        const heroSubtitle = document.querySelector('.animate-hero-subtitle');
+        const progressBar = document.getElementById('progressBar');
+
+        // Initial hero text animation
+        if (heroTitle && heroSubtitle) {
+            heroTitle.style.animationPlayState = 'running';
+            heroSubtitle.style.animationPlayState = 'running';
+        }
+
         // Toggle mobile menu visibility
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
@@ -578,6 +640,10 @@
             } else {
                 scrollToTopBtn.classList.add('hidden');
             }
+
+            // Update Scroll Progress Bar (New Enhancement)
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = scrollPercent + '%';
         });
 
         scrollToTopBtn.addEventListener('click', () => {
