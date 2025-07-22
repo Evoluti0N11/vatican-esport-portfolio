@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vatican eSport - Elite Roster for The Finals</title>
+    <link rel="icon" href="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +33,15 @@
             width: 5rem;
             height: 0.25rem;
             background-color: #f59e0b;
+            /* New: Animation for underline */
+            transition: width 0.3s ease, background-color 0.3s ease;
         }
+        /* New: Section Title Underline Hover Effect */
+        .section-title:hover::after {
+            width: 6rem; /* Slightly wider on hover */
+            background-color: #d97706; /* Slightly darker amber */
+        }
+
         .section-intro {
             max-width: 48rem;
             margin-left: auto;
@@ -65,6 +74,15 @@
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
             border-color: #f59e0b; /* Highlight border on hover */
         }
+        /* New: "View Proof" Link Hover Effect */
+        .record-card-interactive .text-amber-600 {
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+        .record-card-interactive .text-amber-600:hover {
+            color: #d97706; /* Darker amber on hover */
+            text-decoration: underline; /* Underline on hover */
+        }
+
 
         /* Button Hover Effects (enhanced) */
         .cta-button {
@@ -272,13 +290,13 @@
                     <p class="text-6xl font-black text-amber-500">3<span class="text-4xl">rd</span></p>
                     <h5 class="font-bold mt-2">CIS League #4</h5>
                     <p class="text-sm text-slate-500">First team tournament</p>
-                    <span class="text-amber-600 text-sm font-semibold mt-3 inline-block">View Proof →</span>
+                    <span class="text-amber-600 text-sm font-semibold mt-3 inline-block hover:underline hover:text-amber-700">View Proof →</span>
                 </div>
                 <div class="record-card-interactive bg-white rounded-xl p-6 text-center border border-slate-200" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">
                     <p class="text-6xl font-black text-amber-500">3<span class="text-4xl">rd</span></p>
                     <h5 class="font-bold mt-2">ProHubs S1 Qualifiers</h5>
                     <p class="text-sm text-slate-500">Result from official site</p>
-                    <span class="text-amber-600 text-sm font-semibold mt-3 inline-block">View Proof →</span>
+                    <span class="text-amber-600 text-sm font-semibold mt-3 inline-block hover:underline hover:text-amber-700">View Proof →</span>
                     <a href="https://prohubs.tf/phl/season-1/qualifiers/eu" target="_blank" class="text-blue-500 text-sm font-semibold mt-2 inline-block">Visit Qualifier Website →</a>
                 </div>
                 <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm">
@@ -383,7 +401,7 @@
             <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-amber-400 transition-colors cta-button flex items-center justify-center">
                 <i class="fas fa-envelope mr-2"></i> <span>Email Us</span>
             </a>
-            <a href="https://twitter.com/Evoluti0N_FN" target="_blank" class="bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors cta-button flex items-center justify-center">
+            <a href="https://x.com/Evoluti0N11" target="_blank" class="bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors cta-button flex items-center justify-center">
                 <i class="fab fa-x-twitter mr-2"></i> <span>Evoluti0N's X</span>
             </a>
         </div>
@@ -401,6 +419,10 @@
         <img id="modal-image" src="" alt="Proof of achievement" class="w-full h-full object-contain rounded-md">
     </div>
 </div>
+
+<button id="scrollToTopBtn" class="fixed bottom-6 right-6 bg-amber-500 text-white p-3 rounded-full shadow-lg hover:bg-amber-600 transition-all duration-300 z-40 hidden">
+    <i class="fas fa-arrow-up"></i>
+</button>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -545,6 +567,24 @@
             if (e.target === proofModal) { // Check if the click was directly on the overlay
                 closeModal();
             }
+        });
+
+        // Scroll to Top Button Logic (New Enhancement)
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling down 300px
+                scrollToTopBtn.classList.remove('hidden');
+            } else {
+                scrollToTopBtn.classList.add('hidden');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
 </script>
