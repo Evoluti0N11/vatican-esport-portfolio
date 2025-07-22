@@ -8,33 +8,28 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Subtle diagonal gradient background */
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            color: #1e293b; /* Slightly darker default text for better readability */
+            color: #1e293b;
         }
 
-        /* Custom Cursor (New Enhancement) */
-        html {
-            cursor: url('https://i.imgur.com/K1Lg5Qd.png'), auto; /* Default cursor (crosshair-like placeholder) */
-        }
-        a, button, .cursor-pointer, .player-card { /* Removed .record-card-interactive as it's not a direct clickable anymore */
-            cursor: url('https://i.imgur.com/h5TzG1H.png'), pointer; /* Pointer cursor (finger-like placeholder) */
-        }
-        /* Fallback for browsers that don't support custom cursors or if image fails */
-        a, button, .cursor-pointer, .player-card { /* Removed .record-card-interactive */
-            cursor: pointer;
+        /* Custom Colors inspired by "The Finals" */
+        :root {
+            --finals-blue: #1e3a8a;
+            --finals-orange: #f97316;
+            --finals-gray: #4b5563;
         }
 
+        /* Section Titles */
         .section-title {
-            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
             font-size: 2.25rem;
-            line-height: 2.5rem;
-            letter-spacing: -0.025em;
+            color: var(--finals-blue);
             position: relative;
         }
         .section-title::after {
@@ -45,198 +40,129 @@
             transform: translateX(-50%);
             width: 5rem;
             height: 0.25rem;
-            background-color: #f59e0b;
-            /* Animation for underline on hover (New Enhancement) */
-            transition: width 0.3s ease, background-color 0.3s ease;
+            background-color: var(--finals-orange);
+            transition: width 0.3s ease;
         }
-        /* Section Title Underline Hover Effect (New Enhancement) */
         .section-title:hover::after {
-            width: 6rem; /* Slightly wider on hover */
-            background-color: #d97706; /* Slightly darker amber */
+            width: 6rem;
         }
 
         .section-intro {
             max-width: 48rem;
             margin-left: auto;
             margin-right: auto;
-            color: #475569;
+            color: var(--finals-gray);
         }
-        /* Player Card Details Transition */
+
+        /* Player Card Animation */
         .player-card .details {
-            transition: all 0.3s ease-in-out;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
         }
-        /* Player Card Hover Effect (Refined) */
+        .player-card .details.expanded {
+            height: auto;
+            opacity: 1;
+            padding-top: 1rem;
+        }
         .player-card:hover {
-            transform: translateY(-4px); /* Slight lift */
-            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* More pronounced shadow */
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        /* Navigation Link Hover Effect (improved) */
-        .nav-link {
-            transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
-        }
+
+        /* Navigation Effects */
         .nav-link:hover {
-            color: #f59e0b;
-            transform: translateY(-2px); /* Slight lift on hover */
+            color: var(--finals-orange);
+            transform: translateY(-2px);
+            transition: color 0.2s ease, transform 0.2s ease;
         }
         .active-nav {
-            color: #f59e0b;
+            color: var(--finals-orange);
             font-weight: 600;
         }
-        /* Record Card Interactive Hover Effect (retained) */
-        /* This class is no longer applied to the whole div, but the individual cards still have hover effects from their styling */
-        .record-card-container:hover { /* New class for the div containing record data */
+
+        /* Record Card Effects */
+        .record-card-container:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            border-color: #f59e0b; /* Highlight border on hover */
-        }
-        .record-card-container {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--finals-orange);
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-        /* "View Proof" Link Hover Effect (New Enhancement) */
-        .proof-link { /* Using proof-link directly, also added cursor-pointer in HTML */
-            transition: color 0.2s ease, text-decoration 0.2s ease;
-        }
-        .proof-link:hover {
-            color: #d97706; /* Darker amber on hover */
-            text-decoration: underline; /* Underline on hover */
-        }
 
-
-        /* Button Hover Effects (enhanced) */
-        .cta-button {
-            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-        }
+        /* Button Effects */
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
 
-        /* Fade-in-on-Scroll Animation */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        /* Slide-in Animations */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
         }
 
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Custom Keyframes for Hero Text Animation (New Enhancement) */
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-hero-title {
-            animation: slideInUp 1s ease-out forwards;
-        }
-        .animate-hero-subtitle {
-            animation: slideInUp 1s ease-out forwards;
-            animation-delay: 0.3s; /* Delay for secondary text */
-            opacity: 0; /* Start hidden */
-        }
-
-        /* The Finals Background Section with Video */
-        #the-finals-esports {
-            position: relative;
-            overflow: hidden;
-            color: white; /* Ensure text is readable on dark background */
-        }
-
-        /* Styling for the YouTube iframe */
-        #the-finals-esports iframe {
+        /* Hero Background */
+        .hero-bg {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            /* These dimensions are key for covering the entire background */
-            min-width: 100%;
-            min-height: 100%;
-            width: 100vw; /* Ensure it covers viewport width */
-            height: 56.25vw; /* 16:9 aspect ratio (9/16 * 100vw) */
-            
-            /* If the viewport is taller than 16:9, ensure vertical coverage */
-            /* This makes the video scale to cover the shorter dimension first */
-            @media (min-aspect-ratio: 16/9) {
-                height: 56.25vw; /* Height is determined by width */
-            }
-            @media (max-aspect-ratio: 16/9) {
-                width: 177.78vh; /* Width is determined by height (16/9 * 100vh) */
-            }
-            
-            z-index: 0;
-            transform: translate(-50%, -50%);
-            /* Ensure the video covers the entire container, even if it scales unevenly */
-            object-fit: cover; /* This property primarily affects video elements, not iframes directly, but good to have if you switch */
-            pointer-events: none; /* Prevent clicks on the iframe itself */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b2527efb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
         }
-
-        /* Dark overlay for readability */
-        #the-finals-esports::before {
+        .hero-bg::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7); /* Dark overlay */
-            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
         }
 
-        #the-finals-esports .container {
-            position: relative;
-            z-index: 2; /* Bring content above overlay */
-        }
-
-        #the-finals-esports .section-title,
-        #the-finals-esports .section-intro {
-            color: white; /* Ensure text is white */
-        }
-        /* Text Shadow for Readability over Video (New Enhancement) */
-        #the-finals-esports .section-title,
-        #the-finals-esports .section-intro p {
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9); /* Subtle shadow for readability */
-        }
-
-        #the-finals-esports .section-title::after {
-            background-color: #f59e0b; /* Keep accent color */
-        }
-
-        /* Adjust link color in The Finals section for contrast */
-        #the-finals-esports a {
-            color: #8ac0ff; /* Lighter blue for better contrast */
-        }
-        #the-finals-esports a:hover {
-            color: #b0d0ff;
-        }
-
-        /* Proof Modal Shadow Enhancement */
-        #proof-modal .bg-white {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Stronger shadow for modal */
-        }
-
-        /* Scroll Progress Bar (New Enhancement) */
-        #progressBar {
+        /* Preloader */
+        #preloader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background-color: #f59e0b;
-            z-index: 1000;
-            transition: width 0.1s linear;
+            inset: 0;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
         }
 
+        /* Navigation Scroll Effect */
+        header.scrolled {
+            background-color: #e2e8f0;
+            transition: background-color 0.3s ease;
+        }
     </style>
 </head>
 <body class="text-slate-900">
 
-<div id="progressBar"></div>
+<div id="preloader">
+    <i class="fas fa-spinner fa-spin text-4xl text-amber-500"></i>
+</div>
 
 <header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
         <a href="#hero" class="flex items-center gap-3">
-            <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" alt="Team Logo" class="h-10 w-10 rounded-full">
+            <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" alt="Vatican eSport Logo" class="h-10 w-10 rounded-full">
             <h1 class="text-xl font-bold text-slate-900 hidden sm:block">
                 Vatican <span class="text-amber-500">eSport</span>
             </h1>
@@ -248,153 +174,161 @@
             <a href="#the-finals-esports" class="nav-link text-slate-600 font-medium">The Finals Esports</a>
             <a href="#our-commitment" class="nav-link text-slate-600 font-medium">Our Commitment</a>
         </div>
-        <a href="mailto:ciampichiniluca@gmail.com" class="hidden md:block bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button flex items-center justify-center">
-            <i class="fas fa-envelope mr-2"></i> <span>Contact Us</span>
+        <a href="mailto:ciampichiniluca@gmail.com" class="hidden md:block bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 cta-button flex items-center">
+            <i class="fas fa-envelope mr-2"></i> Contact Us
         </a>
         <div id="mobile-menu-button" class="md:hidden cursor-pointer">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </div>
     </nav>
-    <div id="mobile-menu" class="hidden md:hidden">
+    <div id="mobile-menu" class="hidden md:hidden bg-slate-50">
         <a href="#roster" class="block text-center py-2 px-4 text-slate-600 hover:bg-slate-100">Roster</a>
         <a href="#record" class="block text-center py-2 px-4 text-slate-600 hover:bg-slate-100">Record</a>
         <a href="#content" class="block text-center py-2 px-4 text-slate-600 hover:bg-slate-100">Content</a>
         <a href="#the-finals-esports" class="block text-center py-2 px-4 text-slate-600 hover:bg-slate-100">The Finals Esports</a>
         <a href="#our-commitment" class="block text-center py-2 px-4 text-slate-600 hover:bg-slate-100">Our Commitment</a>
         <div class="p-4">
-            <a href="mailto:ciampichiniluca@gmail.com" class="w-full block text-center bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button flex items-center justify-center">
-                <i class="fas fa-envelope mr-2"></i> <span>Contact Us</span>
+            <a href="mailto:ciampichiniluca@gmail.com" class="block bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 cta-button flex items-center justify-center">
+                <i class="fas fa-envelope mr-2"></i> Contact Us
             </a>
         </div>
     </div>
 </header>
 
 <main>
-    <section id="hero" class="py-20 md:py-32 fade-in-section">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight animate-hero-title">Vatican eSport: <span class="text-amber-500">Elite Roster</span></h2>
-            <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-600 animate-hero-subtitle">
-                We are a top-tier, battle-hardened roster with proven LAN experience and a relentless drive to win. With our sights set on The Finals' competitive scene, we are seeking a partnership with an ambitious organization to take us to the next level.
+    <section id="hero" class="py-20 md:py-32 relative">
+        <div class="hero-bg"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black text-white leading-tight">Vatican eSport: <span class="text-amber-500">Elite Roster</span></h2>
+            <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-200">
+                We are a top-tier, battle-hardened roster with proven LAN experience and a relentless drive to win. Seeking an ambitious organization to dominate The Finals' competitive scene.
             </p>
-            <div class="mt-10 flex justify-center items-center gap-4">
-                <a href="#record" class="bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-900 transition-colors cta-button flex items-center">
-                    View Our Record <i class="fas fa-arrow-down ml-2 text-sm"></i>
-                </a>
-            </div>
+            <a href="#record" class="mt-10 inline-block bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-900 cta-button flex items-center justify-center mx-auto">
+                View Our Record <i class="fas fa-arrow-down ml-2"></i>
+            </a>
         </div>
     </section>
-    
-    <section id="roster" class="py-20 bg-white fade-in-section">
+
+    <section id="roster" class="py-20 bg-white slide-in-left">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
-                <h3 class="section-title text-slate-900">Meet the Roster</h3>
+                <h3 class="section-title">Meet the Roster</h3>
                 <p class="section-intro mt-4">
-                    Our strength lies in our synergy and deep competitive background. Each player brings years of high-level experience and a commitment to excellence. Click on a card to see detailed player history and experience.
+                    Our team combines synergy, experience, and dedication. Click a card to see each player’s history and achievements.
                 </p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8 items-start"> 
-                <div class="player-card bg-slate-50 border border-slate-200 rounded-xl p-6 text-center cursor-pointer hover:shadow-lg hover:border-amber-400 transition-all" data-player="evoluti0n">
-                    <h4 class="text-2xl font-bold"><i class="fas fa-crosshairs text-amber-500 mr-3"></i> Evoluti0N</h4>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="player-card bg-slate-50 border border-slate-200 rounded-xl p-6 text-center cursor-pointer transition-all" data-player="evoluti0n" aria-expanded="false">
+                    <h4 class="text-2xl font-bold"><i class="fas fa-crosshairs text-amber-500 mr-2"></i> Evoluti0N</h4>
                     <p class="text-amber-500 font-semibold mt-1">Medium Class</p>
-                    <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2">
-                        <p><strong>Role:</strong> Team Captain & Strategist</p>
-                        <p><strong>Nationality:</strong> 🇮🇹 Italian</p>
-                        <p><strong>Age:</strong> 24</p>
-                        <p><strong>Competitive Background:</strong> Evoluti0N boasts extensive LAN experience across multiple titles. In <strong>CS:GO</strong>, he competed in the <strong>Madrid LAN</strong>, secured <strong>1st place</strong> at a significant Belgian LAN event, and also qualified <strong>1st in the Predator League Qualifier Sweden</strong> (<a href="https://x.com/RisenWarriorsgg/status/1315347329034190852" target="_blank" class="text-blue-500 hover:underline">details here</a>). He further honed his skills by participating in ESEA Intermediate playoffs. His LAN presence extends to <strong>Halo Infinite</strong>, with competition at <strong>Europa Halo Blackpool 2023</strong> (<a href="https://liquipedia.net/halo/Europa_Halo/Blackpool/2023" target="_blank" class="text-blue-500 hover:underline">details here</a>). He has been an active and dedicated player in <strong>The Finals</strong> since its Open Beta, demonstrating consistent high-level performance.</p>
-                        <p><strong>Discord:</strong> evoluti0n11</p>
+                    <div class="details">
+                        <ul class="list-none space-y-2 mt-4 text-slate-600">
+                            <li><strong>Role:</strong> Team Captain & Strategist</li>
+                            <li><strong>Nationality:</strong> 🇮🇹 Italian</li>
+                            <li><strong>Age:</strong> 24</li>
+                            <li><i class="fas fa-trophy text-amber-500 mr-2"></i> 1st - Predator League Qualifier Sweden</li>
+                            <li><i class="fas fa-map-pin text-amber-500 mr-2"></i> Madrid LAN - CS:GO</li>
+                            <li><i class="fas fa-gamepad text-amber-500 mr-2"></i> Europa Halo Blackpool 2023</li>
+                            <li><strong>Discord:</strong> evoluti0n11</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="player-card bg-slate-50 border border-slate-200 rounded-xl p-6 text-center cursor-pointer hover:shadow-lg hover:border-amber-400 transition-all" data-player="ireleezi">
-                    <h4 class="text-2xl font-bold"><i class="fas fa-bolt text-amber-500 mr-3"></i> Ireleezi</h4>
+                <div class="player-card bg-slate-50 border border-slate-200 rounded-xl p-6 text-center cursor-pointer transition-all" data-player="ireleezi" aria-expanded="false">
+                    <h4 class="text-2xl font-bold"><i class="fas fa-bolt text-amber-500 mr-2"></i> Ireleezi</h4>
                     <p class="text-amber-500 font-semibold mt-1">Light Class</p>
-                    <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2">
-                        <p><strong>Role:</strong> Versatile Fragger</p>
-                        <p><strong>Nationality:</strong> 🇮🇪 Irish</p>
-                        <p><strong>Age:</strong> 22</p>
-                        <p><strong>Competitive Background:</strong> Proven competitor in Halo Infinite with LAN experience, notably at the Europa Halo Blackpool 2023 (<a href="https://liquipedia.net/halo/Europa_Halo/Blackpool/2023" target="_blank" class="text-blue-500 hover:underline">details</a>). Playing The Finals since Open Beta.</p>
-                        <p><strong>Discord:</strong> ireleezi</p>
+                    <div class="details">
+                        <ul class="list-none space-y-2 mt-4 text-slate-600">
+                            <li><strong>Role:</strong> Versatile Fragger</li>
+                            <li><strong>Nationality:</strong> 🇮🇪 Irish</li>
+                            <li><strong>Age:</strong> 22</li>
+                            <li><i class="fas fa-gamepad text-amber-500 mr-2"></i> Europa Halo Blackpool 2023</li>
+                            <li><strong>Discord:</strong> ireleezi</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="player-card bg-slate-50 border border-slate-200 rounded-xl p-6 text-center cursor-pointer hover:shadow-lg hover:border-amber-400 transition-all" data-player="uwu">
-                    <h4 class="text-2xl font-bold"><i class="fas fa-shield-alt text-amber-500 mr-3"></i> UwU (Spongebob)</h4>
+                <div class="player-card bg-slate-50 border border-slate-200 rounded-xl p-6 text-center cursor-pointer transition-all" data-player="uwu" aria-expanded="false">
+                    <h4 class="text-2xl font-bold"><i class="fas fa-shield-alt text-amber-500 mr-2"></i> UwU (Spongebob)</h4>
                     <p class="text-amber-500 font-semibold mt-1">Heavy Class</p>
-                    <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2">
-                        <p><strong>Role:</strong> Leaderboard Dominator</p>
-                        <p><strong>Nationality:</strong> 🇳🇱 Dutch</p>
-                        <p><strong>Age:</strong> 20</p>
-                        <p><strong>Competitive Background:</strong> A formidable player who has consistently achieved top leaderboard rankings across all seasons of The Finals.</p>
-                        <p><strong>Discord:</strong> synphomia</p>
+                    <div class="details">
+                        <ul class="list-none space-y-2 mt-4 text-slate-600">
+                            <li><strong>Role:</strong> Leaderboard Dominator</li>
+                            <li><strong>Nationality:</strong> 🇳🇱 Dutch</li>
+                            <li><strong>Age:</strong> 20</li>
+                            <li><i class="fas fa-chart-line text-amber-500 mr-2"></i> Top Leaderboard Rankings</li>
+                            <li><strong>Discord:</strong> synphomia</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="record" class="py-20 bg-slate-100 fade-in-section">
+    <section id="record" class="py-20 bg-slate-100 slide-in-right">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
-                <h3 class="section-title text-slate-900">Competitive Record</h3>
+                <h3 class="section-title">Competitive Record</h3>
                 <p class="section-intro mt-4">
-                    Our dedication translates into consistent, top-tier results. This section highlights our key achievements. Click on a card to view visual proof where available.
+                    Our results showcase our skill and consistency. Click cards for proof where available.
                 </p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="record-card-container bg-white rounded-xl p-6 text-center border border-slate-200">
-                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-trophy text-5xl"></i> 3<span class="text-4xl">rd</span></p>
+                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-trophy"></i> 3<span class="text-4xl">rd</span></p>
                     <h5 class="font-bold mt-2">CIS League #4</h5>
                     <p class="text-sm text-slate-500">First team tournament</p>
-                    <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/image.png?raw=true">View Proof →</span>
+                    <span class="proof-trigger text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/image.png?raw=true">View Proof →</span>
                 </div>
                 <div class="record-card-container bg-white rounded-xl p-6 text-center border border-slate-200">
-                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-medal text-5xl"></i> 3<span class="text-4xl">rd</span></p>
+                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-medal"></i> 3<span class="text-4xl">rd</span></p>
                     <h5 class="font-bold mt-2">ProHubs S1 Qualifiers</h5>
-                    <p class="text-sm text-slate-500">Result from official site</p>
-                    <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">View Proof →</span>
-                    <a href="https://prohubs.tf/phl/season-1/qualifiers/eu" target="_blank" class="text-blue-500 text-sm font-semibold mt-2 inline-block">Visit Qualifier Website →</a>
+                    <p class="text-sm text-slate-500">Official result</p>
+                    <span class="proof-trigger text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">View Proof →</span>
+                    <a href="https://prohubs.tf/phl/season-1/qualifiers/eu" target="_blank" class="text-blue-500 text-sm font-semibold mt-2 inline-block">Qualifier Site →</a>
                 </div>
-                <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm record-card-container">
-                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-chart-line text-5xl"></i> T8/9</p>
+                <div class="record-card-container bg-white rounded-xl p-6 text-center border border-green-500 relative">
+                    <span class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">Live</span>
+                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-chart-line"></i> T8/9</p>
                     <h5 class="font-bold mt-2">ProHubs S1 League Play</h5>
-                    <p class="text-sm text-slate-500">Current placing with stand-in</p>
-                    <a href="https://liquipedia.net/lab/Thefinals/ProHubs.TF/S1/Europe" target="_blank" class="text-amber-600 hover:text-amber-700 text-sm font-semibold mt-3 inline-block">View on Liquipedia →</a>
+                    <p class="text-sm text-slate-500">Current with stand-in</p>
+                    <a href="https://liquipedia.net/lab/Thefinals/ProHubs.TF/S1/Europe" target="_blank" class="text-amber-600 text-sm font-semibold mt-3 inline-block">Liquipedia →</a>
                 </div>
-                <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm record-card-container">
-                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-globe text-5xl"></i> Top 200</p>
+                <div class="record-card-container bg-white rounded-xl p-6 text-center border border-slate-200">
+                    <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-globe"></i> Top 200</p>
                     <h5 class="font-bold mt-2">Global Ranked Placements</h5>
-                    <p class="text-sm text-slate-500">Our core members consistently achieve top-tier global rankings. While university and work commitments limit consistent top 70 placement, our individual skill is verifiable on official leaderboards (search: Evoluti0N, Ireleezi, UwU).</p>
-                    <a href="https://id.embark.games/the-finals/leaderboards/s7" target="_blank" class="text-amber-600 hover:text-amber-700 text-sm font-semibold mt-3 inline-block">View Leaderboard →</a>
+                    <p class="text-sm text-slate-500">Consistent high rankings</p>
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b2527efb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Leaderboard Screenshot" class="mt-4 rounded-md">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="content" class="py-20 bg-white fade-in-section">
+    <section id="content" class="py-20 bg-white slide-in-left">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
-                <h3 class="section-title text-slate-900">Content & Community Reach</h3>
+                <h3 class="section-title">Content & Community Reach</h3>
                 <p class="section-intro mt-4">
-                    Winning is only half the battle. We are dedicated to building a brand and engaging with the community through content creation, offering additional value and visibility for our partners.
+                    We build our brand and engage fans through streaming and content creation, adding value for partners.
                 </p>
             </div>
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-                <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 flex flex-col items-center text-center">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 text-center">
                     <div class="text-5xl mb-4 text-amber-500"><i class="fas fa-tv"></i></div>
                     <h4 class="text-2xl font-bold">Evoluti0N on Twitch</h4>
-                    <p class="text-slate-600 my-2 flex-grow">Equipped for high-quality streaming with a dual PC setup. Open to streaming on other platforms as needed to support our partners.</p>
-                    <a href="https://www.twitch.tv/evoluti0n11" target="_blank" class="mt-4 bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button flex items-center justify-center">
-                        <i class="fab fa-twitch mr-2"></i> <span>Visit Twitch Channel</span>
+                    <p class="text-slate-600 my-2">High-quality streaming with dual PC setup.</p>
+                    <a href="https://www.twitch.tv/evoluti0n11" target="_blank" class="mt-4 inline-block bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 cta-button flex items-center justify-center mx-auto">
+                        <i class="fab fa-twitch mr-2"></i> Visit Twitch
                     </a>
                 </div>
-                <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 flex flex-col items-center text-center">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 text-center">
                     <div class="text-5xl mb-4 text-amber-500"><i class="fas fa-headset"></i></div>
                     <h4 class="text-2xl font-bold">Ireleezi's Content</h4>
-                    <p class="text-slate-600 my-2 flex-grow">Engaging with the community through streaming and short-form content.</p>
-                    <div class="mt-4 flex gap-4">
-                        <a href="https://www.twitch.tv/ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button flex items-center justify-center">
-                            <i class="fab fa-twitch mr-2"></i> <span>Twitch</span>
+                    <p class="text-slate-600 my-2">Streaming and short-form content.</p>
+                    <div class="mt-4 flex gap-4 justify-center">
+                        <a href="https://www.twitch.tv/ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 cta-button flex items-center">
+                            <i class="fab fa-twitch mr-2"></i> Twitch
                         </a>
-                        <a href="https://www.tiktok.com/@ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button flex items-center justify-center">
-                            <i class="fab fa-tiktok mr-2"></i> <span>TikTok</span>
+                        <a href="https://www.tiktok.com/@ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 cta-button flex items-center">
+                            <i class="fab fa-tiktok mr-2"></i> TikTok
                         </a>
                     </div>
                 </div>
@@ -402,44 +336,40 @@
         </div>
     </section>
 
-    <section id="the-finals-esports" class="py-20 fade-in-section">
+    <section id="the-finals-esports" class="py-20 relative slide-in-right">
         <iframe 
             src="https://www.youtube.com/embed/RFlxLo5GJMo?autoplay=1&mute=1&loop=1&playlist=RFlxLo5GJMo&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0" 
             frameborder="0" 
-            allow="autoplay; muted; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
+            allow="autoplay; muted" 
+            class="absolute top-0 left-0 w-full h-full object-cover">
         </iframe>
-        <div class="container mx-auto px-6 text-center">
-            <h3 class="section-title">The Finals: The Future of Esports</h3>
-            <div class="section-intro mt-4 text-left mx-auto">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h3 class="section-title text-white">The Finals: The Future of Esports</h3>
+            <div class="section-intro mt-4 text-white">
                 <p class="mb-4">
-                    <a href="https://www.reachthefinals.com/" target="_blank" class="font-semibold"><strong>The Finals</strong></a> is rapidly redefining the esports landscape with its unique blend of dynamic gameplay and fully destructible environments. This innovative approach offers unparalleled competitive depth and spectator appeal, setting it apart in the FPS genre.
-                </p>
-                <p class="mb-4">
-                    The game's competitive scene is experiencing incredible growth, highlighted by significant developments like the upcoming <strong>official Major tournament in 2025</strong>. This highly anticipated event boasts a substantial <strong>$100,000 prize pool</strong> and will commence with open qualifiers in August, culminating in a grand final at <strong>DreamHack Stockholm in November</strong>. For more in-depth details on this exciting journey, visit <a href="https://www.reachthefinals.com/major25" target="_blank" class="font-semibold">The Finals Major page</a> and review their <a href="https://www.reachthefinals.com/patchnotes/rte1" target="_blank" class="font-semibold">Road to Esports Part 1</a> and <a href="https://www.reachthefinals.com/patchnotes/rte2" target="_blank" class="font-semibold">Part 2</a> patch notes.
+                    <a href="https://www.reachthefinals.com/" target="_blank" class="text-amber-400">The Finals</a> blends dynamic gameplay with destructible environments, redefining FPS esports.
                 </p>
                 <p class="mb-4">
-                    Furthermore, strategic partnerships with established esports organizations, such as <a href="https://twitter.com/Spacestation/status/1939749642297909304" target="_blank" class="font-semibold">Space Station Gaming (SSG)</a>, are crucial in solidifying <strong>The Finals'</strong> position as a premier esport. These collaborations attract top-tier talent, boost viewership, and significantly increase the game's overall visibility within the competitive gaming world.
+                    With a $100,000 Major in 2025 and partnerships like <a href="https://twitter.com/Spacestation/status/1939749642297909304" target="_blank" class="text-amber-400">SSG</a>, it’s growing fast. See <a href="https://www.reachthefinals.com/major25" target="_blank" class="text-amber-400">Major details</a>.
                 </p>
-                <p class="text-sm italic mt-8 text-slate-300">
-                    Background video: "<a href="https://www.youtube.com/watch?v=RFlxLo5GJMo" target="_blank" class="underline">The Finals Official Reveal Trailer</a>" by THE FINALS. All rights reserved by Embark Studios.
-                </p>
+                <p class="mt-4 text-lg font-bold">"Over 50K players in Season 1, $100K Major in 2025" - Stats</p>
             </div>
         </div>
     </section>
 
-    <section id="our-commitment" class="py-20 bg-white fade-in-section">
+    <section id="our-commitment" class="py-20 bg-white slide-in-left">
         <div class="container mx-auto px-6 text-center">
-            <h3 class="section-title text-slate-900">Our Commitment & Readiness</h3>
-            <div class="section-intro mt-4 text-left mx-auto">
+            <h3 class="section-title">Our Commitment & Readiness</h3>
+            <div class="section-intro mt-4">
                 <p class="mb-4">
-                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team has a <span class="text-amber-500 font-bold">proven track record</span>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a stand-in, as our third player is unable to participate due to equipment limitations while on holiday (Xbox Series S & TV setup).
+                    We’re dedicated to excelling in The Finals. Despite university, we train intensively for the Major Qualifiers (Aug-Sep 2025).
                 </p>
-                <p class="mb-4">
-                    Despite our university commitments, we consistently dedicate significant time to <span class="text-amber-500 font-bold">intensive training, scrims, and meticulous preparation</span> for upcoming tournaments, including the highly anticipated <strong>Major Qualifiers around late August and early September</strong>. Our full, formidable lineup will be back together and actively scrimming starting <strong>August 16th</strong>, ready to push for top placements.
-                </p>
-                <p class="mb-4">
-                    Our ultimate goal is to proudly represent a forward-thinking organization and establish ourselves as a leading force in <strong>The Finals</strong> competitive scene. With our relentless drive, combined with a deep understanding of the game and strategic teamwork, we are ready to embrace every challenge and achieve greatness together.
+                <div class="mt-6 grid gap-4 text-left max-w-md mx-auto">
+                    <p><strong>Aug 16, 2025:</strong> Full roster scrims resume</p>
+                    <p><strong>Aug-Sep:</strong> Major Qualifiers prep</p>
+                </div>
+                <p class="mt-4">
+                    We aim to represent an organization and dominate the scene with our skill and teamwork.
                 </p>
             </div>
         </div>
@@ -448,215 +378,82 @@
 
 <footer class="bg-slate-800 text-white">
     <div class="container mx-auto px-6 py-12 text-center">
-        <h4 class="text-2xl md:text-3xl font-bold">Ready to Build a Winning Legacy?</h4>
-        <p class="mt-4 max-w-2xl mx-auto text-slate-300">We have the skill, the experience, and the ambition. Let's discuss how our team can represent your brand and achieve greatness together. Contact us via email or reach out to our team members on Discord for direct communication.</p>
+        <h4 class="text-2xl md:text-3xl font-bold">Ready to Win Together?</h4>
+        <p class="mt-4 max-w-2xl mx-auto text-slate-300">Let’s discuss how we can represent your brand. Contact us via email or Discord.</p>
         <div class="mt-8 flex justify-center gap-4">
-            <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-amber-400 transition-colors cta-button flex items-center justify-center">
-                <i class="fas fa-envelope mr-2"></i> <span>Email Us</span>
+            <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-amber-600 cta-button flex items-center">
+                <i class="fas fa-envelope mr-2"></i> Email Us
             </a>
-            <a href="https://x.com/Evoluti0N11" target="_blank" class="bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors cta-button flex items-center justify-center">
-                <i class="fab fa-x-twitter mr-2"></i> <span>Evoluti0N's X</span>
+            <a href="https://x.com/Evoluti0N11" target="_blank" class="bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-600 cta-button flex items-center">
+                <i class="fab fa-x-twitter mr-2"></i> Evoluti0N's X
             </a>
         </div>
-        <p class="text-sm text-slate-400 mt-4">
-            © 2025 Vatican eSport | Note: 'Vatican eSport' is a placeholder team name.
-        </p>
+        <div class="mt-4 flex justify-center gap-4">
+            <a href="https://discord.gg/username" target="_blank" class="text-amber-400 hover:text-amber-500"><i class="fab fa-discord text-2xl"></i></a>
+            <a href="https://twitch.tv/evoluti0n11" target="_blank" class="text-amber-400 hover:text-amber-500"><i class="fab fa-twitch text-2xl"></i></a>
+        </div>
+        <p class="text-sm text-slate-400 mt-4">© 2025 Vatican eSport | Placeholder team name.</p>
     </div>
 </footer>
 
-<div id="proof-modal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 items-center justify-center p-4">
+<div id="proof-modal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4">
     <div class="bg-white p-2 rounded-lg max-w-4xl max-h-[90vh] relative">
-        <button id="modal-close-button" class="absolute -top-2 -right-2 bg-white rounded-full p-1 text-slate-800 hover:bg-slate-200 z-10">
+        <button id="modal-close-button" class="absolute -top-2 -right-2 bg-white rounded-full p-1 text-slate-800 hover:bg-slate-200">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
         <img id="modal-image" src="" alt="Proof of achievement" class="w-full h-full object-contain rounded-md">
     </div>
 </div>
 
-<button id="scrollToTopBtn" class="fixed bottom-6 right-6 bg-amber-500 text-white p-3 rounded-full shadow-lg hover:bg-amber-600 transition-all duration-300 z-40 hidden">
-    <i class="fas fa-arrow-up"></i>
-</button>
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const heroTitle = document.querySelector('.animate-hero-title');
-        const heroSubtitle = document.querySelector('.animate-hero-subtitle');
-        const progressBar = document.getElementById('progressBar');
+        const preloader = document.getElementById('preloader');
 
-        // Initial hero text animation
-        if (heroTitle && heroSubtitle) {
-            heroTitle.style.animationPlayState = 'running';
-            heroSubtitle.style.animationPlayState = 'running';
-        }
+        // Hide preloader after load
+        window.addEventListener('load', () => {
+            preloader.style.display = 'none';
+        });
 
-        // Toggle mobile menu visibility
+        // Mobile menu toggle
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            // Exclude links within the mobile menu, as they are handled separately or can close the menu
-            if (!anchor.closest('#mobile-menu')) {
-                anchor.addEventListener('click', function (e) {
-                    // Only prevent default if it's a valid section ID, not just a '#'
-                    if (this.getAttribute('href').length > 1) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute('href');
-                        document.querySelector(targetId).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            }
-        });
-
-        // Player card details toggle
-        const playerCards = document.querySelectorAll('.player-card');
-        playerCards.forEach(card => {
-            const details = card.querySelector('.details');
-            
-            // Initial setup: ensure details are hidden and margin is 0
-            details.style.height = '0px'; 
-            details.style.marginTop = '0'; // Ensure initial state is fully collapsed
-
+        // Player card toggle
+        document.querySelectorAll('.player-card').forEach(card => {
             card.addEventListener('click', () => {
-                // Check if the current card's details are currently expanded
-                // We rely on details.style.height being non-'0px' to indicate expansion
-                const isCurrentlyExpanded = details.style.height !== '0px';
-                
-                // Collapse all other player cards, making sure they are reset
-                document.querySelectorAll('.player-card .details').forEach(otherDetails => {
-                    if (otherDetails !== details) { // Don't touch the clicked card yet
-                        otherDetails.style.height = '0px';
-                        otherDetails.style.marginTop = '0';
-                    }
-                });
-
-                // Toggle the clicked card's expansion
-                if (!isCurrentlyExpanded) {
-                    // Expand the clicked card
-                    details.style.height = details.scrollHeight + 'px';
-                    details.style.marginTop = '1rem';
-                } else {
-                    // Collapse the clicked card if it was already expanded
-                    details.style.height = '0px';
-                    details.style.marginTop = '0';
+                const details = card.querySelector('.details');
+                const isExpanded = card.getAttribute('aria-expanded') === 'true';
+                document.querySelectorAll('.player-card .details').forEach(d => d.classList.remove('expanded'));
+                document.querySelectorAll('.player-card').forEach(c => c.setAttribute('aria-expanded', 'false'));
+                if (!isExpanded) {
+                    details.classList.add('expanded');
+                    card.setAttribute('aria-expanded', 'true');
                 }
             });
         });
 
-
-        // Active navigation link highlighting based on scroll position
-        const sections = document.querySelectorAll('main section');
-        const navLinks = document.querySelectorAll('header nav a');
-
-        const observerOptions = {
-            rootMargin: '-50% 0px -50% 0px', // When the middle of the section is in view
-            threshold: 0 // As soon as any part of the section is visible
-        };
-        
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    navLinks.forEach(link => {
-                        link.classList.remove('active-nav');
-                        // Match nav link href with section ID
-                        if (link.getAttribute('href') === `#${id}`) {
-                            requestAnimationFrame(() => { // Use rAF for smoother class toggling
-                                link.classList.add('active-nav');
-                            });
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            sectionObserver.observe(section);
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Fade-in-on-Scroll Implementation
-        const fadeSections = document.querySelectorAll('.fade-in-section');
-
-        const fadeObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Stop observing once visible
-                }
-            });
-        }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
-
-        fadeSections.forEach(section => {
-            fadeObserver.observe(section);
-        });
-
-        // Image proof modal functionality (Updated Logic)
+        // Proof modal
         const proofModal = document.getElementById('proof-modal');
         const modalImage = document.getElementById('modal-image');
         const closeModalButton = document.getElementById('modal-close-button');
-        
-        // Select elements that will *trigger* the modal specifically
-        const proofTriggers = document.querySelectorAll('.proof-trigger'); 
-
-        proofTriggers.forEach(trigger => {
-            trigger.addEventListener('click', (e) => { // Added 'e' for event object
-                // Prevent the click from bubbling up to parent elements if necessary, 
-                // though with specific targeting, it's less critical here.
-                e.stopPropagation(); 
-
-                const imgSrc = trigger.getAttribute('data-img-src');
-                if (imgSrc && imgSrc !== 'https://i.imgur.com/placeholder.png') {
-                    modalImage.src = imgSrc;
-                    proofModal.classList.remove('hidden');
-                    proofModal.classList.add('flex'); // Show modal
-                } else if (imgSrc === 'https://i.imgur.com/placeholder.png') {
-                    alert('Image proof for this achievement will be added soon.');
-                }
+        document.querySelectorAll('.proof-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                modalImage.src = trigger.getAttribute('data-img-src');
+                proofModal.classList.remove('hidden');
             });
         });
-
-        // Function to close the modal
-        const closeModal = () => {
-            proofModal.classList.add('hidden');
-            proofModal.classList.remove('flex');
-            modalImage.src = ''; // Clear image source
-        };
-
-        // Close modal when close button is clicked
-        closeModalButton.addEventListener('click', closeModal);
-        
-        // Close modal when clicking outside the image
+        closeModalButton.addEventListener('click', () => proofModal.classList.add('hidden'));
         proofModal.addEventListener('click', (e) => {
-            if (e.target === proofModal) { // Check if the click was directly on the overlay
-                closeModal();
-            }
-        });
-
-        // Scroll to Top Button Logic (New Enhancement)
-        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) { // Show button after scrolling down 300px
-                scrollToTopBtn.classList.remove('hidden');
-            } else {
-                scrollToTopBtn.classList.add('hidden');
-            }
-
-            // Update Scroll Progress Bar (New Enhancement)
-            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            progressBar.style.width = scrollPercent + '%';
-        });
-
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            if (e.target === proofModal) proofModal.classList.add('hidden');
         });
     });
 </script>
