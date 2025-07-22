@@ -22,11 +22,11 @@
         html {
             cursor: url('https://i.imgur.com/K1Lg5Qd.png'), auto; /* Default cursor (crosshair-like placeholder) */
         }
-        a, button, .cursor-pointer, .player-card, .record-card-interactive {
+        a, button, .cursor-pointer, .player-card { /* Removed .record-card-interactive as it's not a direct clickable anymore */
             cursor: url('https://i.imgur.com/h5TzG1H.png'), pointer; /* Pointer cursor (finger-like placeholder) */
         }
         /* Fallback for browsers that don't support custom cursors or if image fails */
-        a, button, .cursor-pointer, .player-card, .record-card-interactive {
+        a, button, .cursor-pointer, .player-card { /* Removed .record-card-interactive */
             cursor: pointer;
         }
 
@@ -83,20 +83,20 @@
             font-weight: 600;
         }
         /* Record Card Interactive Hover Effect (retained) */
-        .record-card-interactive {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; /* Added border-color */
-        }
-        .record-card-interactive:hover {
+        /* This class is no longer applied to the whole div, but the individual cards still have hover effects from their styling */
+        .record-card-container:hover { /* New class for the div containing record data */
             transform: translateY(-4px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
             border-color: #f59e0b; /* Highlight border on hover */
         }
+        .record-card-container {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
         /* "View Proof" Link Hover Effect (New Enhancement) */
-        .record-card-interactive .proof-link {
+        .proof-link { /* Using proof-link directly, also added cursor-pointer in HTML */
             transition: color 0.2s ease, text-decoration 0.2s ease;
         }
-        .record-card-interactive .proof-link:hover {
+        .proof-link:hover {
             color: #d97706; /* Darker amber on hover */
             text-decoration: underline; /* Underline on hover */
         }
@@ -339,26 +339,26 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="record-card-interactive bg-white rounded-xl p-6 text-center border border-slate-200" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/image.png?raw=true">
+                <div class="record-card-container bg-white rounded-xl p-6 text-center border border-slate-200">
                     <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-trophy text-5xl"></i> 3<span class="text-4xl">rd</span></p>
                     <h5 class="font-bold mt-2">CIS League #4</h5>
                     <p class="text-sm text-slate-500">First team tournament</p>
-                    <span class="proof-link text-amber-600 text-sm font-semibold mt-3 inline-block">View Proof →</span>
+                    <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/image.png?raw=true">View Proof →</span>
                 </div>
-                <div class="record-card-interactive bg-white rounded-xl p-6 text-center border border-slate-200" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">
+                <div class="record-card-container bg-white rounded-xl p-6 text-center border border-slate-200">
                     <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-medal text-5xl"></i> 3<span class="text-4xl">rd</span></p>
                     <h5 class="font-bold mt-2">ProHubs S1 Qualifiers</h5>
                     <p class="text-sm text-slate-500">Result from official site</p>
-                    <span class="proof-link text-amber-600 text-sm font-semibold mt-3 inline-block">View Proof →</span>
+                    <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">View Proof →</span>
                     <a href="https://prohubs.tf/phl/season-1/qualifiers/eu" target="_blank" class="text-blue-500 text-sm font-semibold mt-2 inline-block">Visit Qualifier Website →</a>
                 </div>
-                <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm">
+                <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm record-card-container">
                     <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-chart-line text-5xl"></i> T8/9</p>
                     <h5 class="font-bold mt-2">ProHubs S1 League Play</h5>
                     <p class="text-sm text-slate-500">Current placing with stand-in</p>
                     <a href="https://liquipedia.net/lab/Thefinals/ProHubs.TF/S1/Europe" target="_blank" class="text-amber-600 hover:text-amber-700 text-sm font-semibold mt-3 inline-block">View on Liquipedia →</a>
                 </div>
-                <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm">
+                <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm record-card-container">
                     <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-globe text-5xl"></i> Top 200</p>
                     <h5 class="font-bold mt-2">Global Ranked Placements</h5>
                     <p class="text-sm text-slate-500">Our core members consistently achieve top-tier global rankings. While university and work commitments limit consistent top 70 placement, our individual skill is verifiable on official leaderboards (search: Evoluti0N, Ireleezi, UwU).</p>
@@ -433,10 +433,10 @@
             <h3 class="section-title text-slate-900">Our Commitment & Readiness</h3>
             <div class="section-intro mt-4 text-left mx-auto">
                 <p class="mb-4">
-                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team has a <span class="text-amber-500 font-bold"><i class="fas fa-check-circle mr-1"></i> proven track record</span>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a stand-in, as our third player is unable to participate due to equipment limitations while on holiday (Xbox Series S & TV setup).
+                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team has a <span class="text-amber-500 font-bold">proven track record</span>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a stand-in, as our third player is unable to participate due to equipment limitations while on holiday (Xbox Series S & TV setup).
                 </p>
                 <p class="mb-4">
-                    Despite our university commitments, we consistently dedicate significant time to <span class="text-amber-500 font-bold"><i class="fas fa-check-circle mr-1"></i> intensive training, scrims, and meticulous preparation</span> for upcoming tournaments, including the highly anticipated <strong>Major Qualifiers around late August and early September</strong>. Our full, formidable lineup will be back together and actively scrimming starting <strong>August 16th</strong>, ready to push for top placements.
+                    Despite our university commitments, we consistently dedicate significant time to <span class="text-amber-500 font-bold">intensive training, scrims, and meticulous preparation</span> for upcoming tournaments, including the highly anticipated <strong>Major Qualifiers around late August and early September</strong>. Our full, formidable lineup will be back together and actively scrimming starting <strong>August 16th</strong>, ready to push for top placements.
                 </p>
                 <p class="mb-4">
                     Our ultimate goal is to proudly represent a forward-thinking organization and establish ourselves as a leading force in <strong>The Finals</strong> competitive scene. With our relentless drive, combined with a deep understanding of the game and strategic teamwork, we are ready to embrace every challenge and achieve greatness together.
@@ -595,20 +595,26 @@
             fadeObserver.observe(section);
         });
 
-        // Image proof modal functionality
+        // Image proof modal functionality (Updated Logic)
         const proofModal = document.getElementById('proof-modal');
         const modalImage = document.getElementById('modal-image');
         const closeModalButton = document.getElementById('modal-close-button');
-        const interactiveCards = document.querySelectorAll('.record-card-interactive');
+        
+        // Select elements that will *trigger* the modal specifically
+        const proofTriggers = document.querySelectorAll('.proof-trigger'); 
 
-        interactiveCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const imgSrc = card.getAttribute('data-img-src');
-                if (imgSrc && imgSrc !== 'https://i.imgur.com/placeholder.png') { // Check for valid image source
+        proofTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => { // Added 'e' for event object
+                // Prevent the click from bubbling up to parent elements if necessary, 
+                // though with specific targeting, it's less critical here.
+                e.stopPropagation(); 
+
+                const imgSrc = trigger.getAttribute('data-img-src');
+                if (imgSrc && imgSrc !== 'https://i.imgur.com/placeholder.png') {
                     modalImage.src = imgSrc;
                     proofModal.classList.remove('hidden');
                     proofModal.classList.add('flex'); // Show modal
-                } else if (imgSrc === 'https://i.imgur.com/placeholder.png') { // Corrected this line to match the alert for placeholder
+                } else if (imgSrc === 'https://i.imgur.com/placeholder.png') {
                     alert('Image proof for this achievement will be added soon.');
                 }
             });
