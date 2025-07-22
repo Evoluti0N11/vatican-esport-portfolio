@@ -14,7 +14,7 @@
             font-family: 'Inter', sans-serif;
             /* Subtle diagonal gradient background */
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            color: #1e293b;
+            color: #1e293b; /* Slightly darker default text for better readability */
         }
         .section-title {
             font-weight: 900;
@@ -155,11 +155,14 @@
             color: #b0d0ff;
         }
 
+        /* Proof Modal Shadow Enhancement */
+        #proof-modal .bg-white {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Stronger shadow for modal */
+        }
+
     </style>
 </head>
-<body class="text-slate-800">
-
-<header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+<body class="text-slate-900"> <header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
         <a href="#hero" class="flex items-center gap-3">
             <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" alt="Team Logo" class="h-10 w-10 rounded-full">
@@ -201,8 +204,8 @@
                 We are a top-tier, battle-hardened roster with proven LAN experience and a relentless drive to win. With our sights set on The Finals' competitive scene, we are seeking a partnership with an ambitious organization to take us to the next level.
             </p>
             <div class="mt-10 flex justify-center items-center gap-4">
-                <a href="#record" class="bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-900 transition-colors cta-button">
-                    View Our Record
+                <a href="#record" class="bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-900 transition-colors cta-button flex items-center">
+                    View Our Record <i class="fas fa-arrow-down ml-2 text-sm"></i>
                 </a>
             </div>
         </div>
@@ -305,8 +308,8 @@
                     <div class="text-5xl mb-4 text-amber-500"><i class="fas fa-tv"></i></div>
                     <h4 class="text-2xl font-bold">Evoluti0N on Twitch</h4>
                     <p class="text-slate-600 my-2 flex-grow">Equipped for high-quality streaming with a dual PC setup. Open to streaming on other platforms as needed to support our partners.</p>
-                    <a href="https://www.twitch.tv/evoluti0n11" target="_blank" class="mt-4 bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">
-                        Visit Twitch Channel
+                    <a href="https://www.twitch.tv/evoluti0n11" target="_blank" class="mt-4 bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button flex items-center justify-center">
+                        <i class="fab fa-twitch mr-2"></i> <span>Visit Twitch Channel</span>
                     </a>
                 </div>
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 flex flex-col items-center text-center">
@@ -314,11 +317,11 @@
                     <h4 class="text-2xl font-bold">Ireleezi's Content</h4>
                     <p class="text-slate-600 my-2 flex-grow">Engaging with the community through streaming and short-form content.</p>
                     <div class="mt-4 flex gap-4">
-                        <a href="https://www.twitch.tv/ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">
-                            Twitch
+                        <a href="https://www.twitch.tv/ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button flex items-center justify-center">
+                            <i class="fab fa-twitch mr-2"></i> <span>Twitch</span>
                         </a>
-                        <a href="https://www.tiktok.com/@ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button">
-                            TikTok
+                        <a href="https://www.tiktok.com/@ireleezi" target="_blank" class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors cta-button flex items-center justify-center">
+                            <i class="fab fa-tiktok mr-2"></i> <span>TikTok</span>
                         </a>
                     </div>
                 </div>
@@ -375,8 +378,8 @@
         <h4 class="text-2xl md:text-3xl font-bold">Ready to Build a Winning Legacy?</h4>
         <p class="mt-4 max-w-2xl mx-auto text-slate-300">We have the skill, the experience, and the ambition. Let's discuss how our team can represent your brand and achieve greatness together. Contact us via email or reach out to our team members on Discord for direct communication.</p>
         <div class="mt-8 flex justify-center gap-4">
-            <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-amber-400 transition-colors cta-button">
-                Email Us
+            <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-amber-400 transition-colors cta-button flex items-center justify-center">
+                <i class="fas fa-envelope mr-2"></i> <span>Email Us</span>
             </a>
             <a href="https://twitter.com/Evoluti0N_FN" target="_blank" class="bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors cta-button">
                 Evoluti0N's Twitter
