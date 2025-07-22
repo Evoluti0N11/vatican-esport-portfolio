@@ -348,20 +348,36 @@
         // Player card details toggle
         const playerCards = document.querySelectorAll('.player-card');
         playerCards.forEach(card => {
+            const details = card.querySelector('.details');
+            
+            // --- FIX FOR INITIAL SCROLLHEIGHT BUG ---
+            // Force a reflow to ensure accurate scrollHeight on initial load
+            // Briefly set height to auto and read offsetHeight, then revert.
+            // This ensures the browser calculates its true height after CSS is applied.
+            details.style.height = 'auto'; 
+            details.offsetHeight; // Forces a reflow/recalculation
+            details.style.height = '0px'; // Revert to initial hidden state
+            // --- END FIX ---
+
             card.addEventListener('click', () => {
-                const details = card.querySelector('.details');
                 const isExpanded = details.style.height !== '0px';
                 
                 // Collapse all other player cards
                 document.querySelectorAll('.player-card .details').forEach(d => {
-                    d.style.height = '0px';
-                    d.style.marginTop = '0'; // Reset margin
+                    if (d !== details) { // Don't collapse the current one yet
+                        d.style.height = '0px';
+                        d.style.marginTop = '0'; // Reset margin
+                    }
                 });
 
                 // Expand clicked card if it was not already expanded
                 if (!isExpanded) {
                     details.style.height = details.scrollHeight + 'px';
                     details.style.marginTop = '1rem'; // Add margin when expanded
+                } else {
+                    // If it was already expanded, collapse it
+                    details.style.height = '0px';
+                    details.style.marginTop = '0';
                 }
             });
         });
