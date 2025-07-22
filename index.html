@@ -322,7 +322,7 @@
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight animate-hero-title">Vatican eSport: <span class="text-amber-500">Elite Roster</span></h2>
             <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-600 animate-hero-subtitle">
-                We are a top-tier, battle-hardened roster with proven LAN experience and a relentless drive to win. With our sights set on The Finals' competitive scene, we are seeking a partnership with an ambitious organization to take us to the next level.
+                We are a <strong>top-tier, battle-hardened roster with proven LAN experience and a relentless drive to win</strong>. With our sights set on The Finals' competitive scene, we are seeking a partnership with an ambitious <strong>organization</strong> to take us to the next level.
             </p>
             <div class="mt-10 flex justify-center items-center gap-4">
                 <a href="#record" class="bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-900 transition-colors cta-button flex items-center">
@@ -505,13 +505,13 @@
             <h3 class="section-title text-sky-950">Our Commitment & Readiness</h3>
             <div class="section-intro mt-4 text-left mx-auto">
                 <p class="mb-4">
-                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team boasts a **proven track record**, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a temporary stand-in. This is because one of our core players is **currently on vacation, and their remote setup does not allow for the optimal performance and consistent commitment** required for high-level league play and scrims. Despite this temporary adjustment, our collective resolve and performance remain undeterred.
+                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team boasts a <strong>proven track record</strong>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a temporary stand-in. This is because one of our core players is <strong>currently on vacation, and their remote setup does not allow for the optimal performance and consistent commitment</strong> required for high-level league play and scrims. Despite this temporary adjustment, our collective resolve and performance remain undeterred.
                 </p>
                 <p class="mb-4">
-                    Despite our university commitments, we consistently dedicate significant time to intensive training, scrims, and meticulous preparation. Our full, formidable lineup will be back together and actively scrimming starting **August 16th**. Upon their return, we will immediately initiate intensive preparation for the highly anticipated **Major 2025 Qualifiers**, future **ProHubs Season 2**, and **all upcoming *The Finals* tournaments**, fully committed to pushing for top placements.
+                    Despite our university commitments, we consistently dedicate significant time to intensive training, scrims, and meticulous preparation. Our full, formidable lineup will be back together and actively scrimming starting <strong>August 16th</strong>. Upon their return, we will immediately initiate intensive preparation for the highly anticipated <strong>Major 2025 Qualifiers</strong>, future <strong>ProHubs Season 2</strong>, and all upcoming <strong>The Finals</strong> tournaments, fully committed to pushing for top placements.
                 </p>
                 <p class="mb-4">
-                    Our ultimate goal is to proudly represent a forward-thinking organization and establish ourselves as a leading force in **The Finals** competitive scene. With our relentless drive, combined with a deep understanding of the game and strategic teamwork, we are ready to embrace every challenge and achieve greatness together.
+                    Our ultimate goal is to proudly represent a forward-thinking <strong>organization</strong> and establish ourselves as a leading force in <strong>The Finals</strong> competitive scene. With our relentless drive, combined with a deep understanding of the game and strategic teamwork, we are ready to embrace every challenge and achieve greatness together.
                 </p>
             </div>
         </div>
@@ -557,7 +557,7 @@
         const heroSubtitle = document.querySelector('.animate-hero-subtitle');
         const progressBar = document.getElementById('progressBar');
         const preloader = document.getElementById('preloader');
-        const mainHeader = document.querySelector('.main-header'); // NEW: Get the header element
+        const mainHeader = document.querySelector('.main-header'); // Get the header element
 
         // Initial hero text animation
         if (heroTitle && heroSubtitle) {
@@ -723,7 +723,7 @@
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             progressBar.style.width = scrollPercent + '%';
 
-            // NEW: Header Shadow on Scroll
+            // Header Shadow on Scroll
             if (window.scrollY > 50) { // Add shadow after scrolling 50px
                 mainHeader.classList.add('scrolled');
             } else {
@@ -738,7 +738,7 @@
             });
         });
 
-        // NEW: Add external link icons dynamically
+        // Add external link icons dynamically
         document.querySelectorAll('a[target="_blank"]').forEach(link => {
             // Check if it's not a button or image link, and doesn't already have an icon
             if (!link.classList.contains('cta-button') && !link.querySelector('img') && !link.querySelector('.external-link-icon')) {
