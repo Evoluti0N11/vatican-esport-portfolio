@@ -50,17 +50,25 @@
         .animate-hero-title { animation: slideInUp 1s ease-out forwards; }
         .animate-hero-subtitle { animation: slideInUp 1s ease-out 0.3s forwards; opacity: 0; }
 
-        #the-finals-esports { position: relative; overflow: hidden; color: white; }
+        /* UPDATED: More robust video background styling */
+        #the-finals-esports {
+            position: relative;
+            overflow: hidden;
+            color: white;
+            display: flex;
+            align-items: center;
+            min-height: 90vh; /* This helps stabilize the layout on mobile */
+        }
         #youtube-background {
-            position: absolute; top: 50%; left: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            /* The following ensures the video covers the screen, even on tall mobile devices */
-            width: 177.77vh; /* 16/9 aspect ratio for a screen height of 100vh */
-            min-width: 100vw;
-            height: 100vh;
-            min-height: 56.25vw; /* 16/9 aspect ratio for a screen width of 100vw */
+            /* These combined values force the 16:9 video to cover any screen ratio */
+            width: 100vw;
+            height: 56.25vw; /* 100 * 9 / 16 */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 100 * 16 / 9 */
             z-index: 0;
             pointer-events: none;
         }
@@ -95,11 +103,10 @@
         .partner-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 0.75rem; border: 2px solid transparent; background: linear-gradient(to right, #f59e0b, #d97706) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; opacity: 0; transition: opacity 0.3s ease-in-out; }
         .partner-card:hover::before { opacity: 1; }
 
-        /* NEW: Ghost Button Style */
         .ghost-button-amber {
             background-color: transparent;
             border: 2px solid #f59e0b;
-            color: #d97706; /* Darker amber for readability */
+            color: #d97706;
         }
         .ghost-button-amber:hover {
             background-color: #f59e0b;
@@ -344,9 +351,9 @@
             </div>
         </section>
 
-        <section id="the-finals-esports" class="py-20 fade-in-section">
+        <section id="the-finals-esports" class="fade-in-section">
             <div id="youtube-background"></div>
-            <div class="container mx-auto px-6 text-center">
+            <div class="container mx-auto px-6 py-20 text-center">
                 <h3 class="section-title">The Finals: A New Era of Esports</h3>
                 <div class="section-intro mt-4 text-left mx-auto">
                     <p class="mb-4"><a href="https://www.reachthefinals.com/" target="_blank" class="font-semibold"><strong>The Finals</strong></a> is rapidly redefining the esports landscape with its unique blend of dynamic gameplay and fully destructible environments. This innovative approach offers unparalleled competitive depth and spectator appeal, setting it apart in the FPS genre.</p>
@@ -410,11 +417,10 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // YouTube Player API for background video
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-background', {
-                videoId: 'RFlxLo5GJMo', // The Finals Reveal Trailer ID
+                videoId: 'RFlxLo5GJMo',
                 playerVars: { autoplay: 1, controls: 0, showinfo: 0, modestbranding: 1, playsinline: 1, rel: 0, fs: 0, loop: 0, playlist: 'RFlxLo5GJMo' },
                 events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
             });
@@ -461,31 +467,31 @@
                 });
             });
 
-            // Observer for section-based animations (nav highlighting and number counters)
+            let countersAnimated = false;
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const id = entry.target.getAttribute('id');
-                        // Nav link highlighting
                         document.querySelectorAll('header nav a').forEach(link => {
                             link.classList.remove('active-nav');
                             if (link.getAttribute('href') === `#${id}`) { requestAnimationFrame(() => link.classList.add('active-nav')); }
                         });
-                        // NEW: Trigger counter animation
-                        if (id === 'record') {
+                        if (id === 'record' && !countersAnimated) {
+                            countersAnimated = true;
                             document.querySelectorAll('.counter-number').forEach(counter => {
                                 const target = +counter.getAttribute('data-target');
-                                const speed = 200; // The lower the faster
+                                counter.innerText = '0';
+                                const speed = 200;
                                 const updateCount = () => {
                                     const count = +counter.innerText;
-                                    const inc = target / speed;
-                                    if(count < target) {
+                                    const inc = Math.max(target / speed, 1);
+                                    if (count < target) {
                                         counter.innerText = Math.ceil(count + inc);
-                                        setTimeout(updateCount, 1);
+                                        setTimeout(updateCount, 15);
                                     } else {
                                         counter.innerText = target;
                                     }
-                                }
+                                };
                                 updateCount();
                             });
                         }
