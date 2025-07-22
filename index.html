@@ -249,6 +249,25 @@
             animation: pulse-red 2s infinite;
         }
 
+        /* NEW: Header Shadow on Scroll */
+        .main-header.scrolled {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            background-color: #f8fafc; /* Ensure solid background when scrolled */
+        }
+
+        /* NEW: External Link Icon Styling */
+        .external-link-icon {
+            margin-left: 0.3em; /* Small space after text */
+            font-size: 0.8em; /* Smaller size relative to text */
+            vertical-align: super; /* Slightly raise it */
+            color: inherit; /* Inherit color from parent link */
+            opacity: 0.7; /* Slightly less prominent */
+            transition: opacity 0.2s ease;
+        }
+        .external-link-icon:hover {
+            opacity: 1; /* Full opacity on hover */
+        }
+
     </style>
 </head>
 <body class="text-slate-900">
@@ -262,7 +281,7 @@
 
 <div id="progressBar"></div>
 
-<header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+<header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200 main-header">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
         <a href="#hero" class="flex items-center gap-3">
             <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" alt="Team Logo" class="h-10 w-10 rounded-full">
@@ -325,11 +344,13 @@
                 <div class="player-card bg-slate-50 border border-slate-200 rounded-xl p-6 text-center cursor-pointer hover:shadow-lg hover:border-amber-400 transition-all" data-player="evoluti0n">
                     <h4 class="text-2xl font-bold"><i class="fas fa-crosshairs text-amber-500 mr-3"></i> Evoluti0N</h4>
                     <p class="text-amber-500 font-semibold mt-1">Medium Class</p>
-                    <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2 text-left"> <p><strong>Role:</strong> Team Captain & Strategist</p>
+                    <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2 text-left">
+                        <p><strong>Role:</strong> Team Captain & Strategist</p>
                         <p><strong>Nationality:</strong> 🇮🇹 Italian</p>
                         <p><strong>Age:</strong> 24</p>
                         <p><strong>Competitive Background:</strong></p>
-                        <ul class="list-disc list-inside space-y-1 ml-4"> <li><span class="font-medium"><i class="fas fa-map-marker-alt mr-2 text-amber-500"></i>CS:GO LAN Experience:</span> Madrid LAN.</li>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li><span class="font-medium"><i class="fas fa-map-marker-alt mr-2 text-amber-500"></i>CS:GO LAN Experience:</span> Madrid LAN.</li>
                             <li><span class="font-medium"><i class="fas fa-trophy mr-2 text-amber-500"></i>CS:GO 1st Place:</span> Significant Belgian LAN event.</li>
                             <li><span class="font-medium"><i class="fas fa-check-circle mr-2 text-amber-500"></i>CS:GO Qualifier:</span> 1st in Predator League Qualifier Sweden (<a href="https://x.com/RisenWarriorsgg/status/1315347329034190852" target="_blank" class="text-blue-500 hover:underline">details</a>).</li>
                             <li><span class="font-medium"><i class="fas fa-network-wired mr-2 text-amber-500"></i>CS:GO Playoffs:</span> ESEA Intermediate playoffs.</li>
@@ -398,7 +419,8 @@
                     <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2">
                         <i class="fas fa-chart-line text-5xl"></i> T8/9
                     </p>
-                    <h5 class="font-bold mt-2 flex items-center justify-center"> ProHubs S1 League Play 
+                    <h5 class="font-bold mt-2 flex items-center justify-center">
+                        ProHubs S1 League Play 
                         <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-red-500 text-white live-indicator">
                             <span class="h-2 w-2 rounded-full bg-white mr-1"></span> LIVE
                         </span>
@@ -409,7 +431,9 @@
                 <div class="bg-white rounded-xl p-6 text-center border border-slate-200 shadow-sm record-card-container">
                     <p class="text-6xl font-black text-amber-500 flex items-center justify-center gap-2"><i class="fas fa-globe text-5xl"></i> Top 200</p>
                     <h5 class="font-bold mt-2">Global Ranked Placements</h5>
-                    <p class="text-sm text-slate-500">Our core members consistently achieve top-tier global rankings. While university and work commitments limit consistent top 70 placement, our individual skill is verifiable on official leaderboards (search: Evoluti0N, Ireleezi, UwU).</p>
+                    <p class="text-sm text-slate-500">
+                        Our core members consistently achieve top-tier global rankings. Individual skill is verifiable on official leaderboards. (Note: University and work commitments impact consistent top 70 placement.)
+                    </p>
                     <a href="https://id.embark.games/the-finals/leaderboards/s7" target="_blank" class="text-amber-600 hover:text-amber-700 text-sm font-semibold mt-3 inline-block">View Leaderboard →</a>
                 </div>
             </div>
@@ -481,13 +505,13 @@
             <h3 class="section-title text-sky-950">Our Commitment & Readiness</h3>
             <div class="section-intro mt-4 text-left mx-auto">
                 <p class="mb-4">
-                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team has a <span class="text-amber-500 font-bold">proven track record</span>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a stand-in, as our third player is unable to participate due to equipment limitations while on holiday (Xbox Series S & TV setup).
+                    At <strong>Vatican eSport</strong>, we are dedicated competitors committed to excelling in this evolving esports ecosystem. Our team boasts a **proven track record**, securing 3rd place in the ProHubs Season 1 Qualifiers with our full lineup. Currently, we are competing in the ProHubs Season 1 League Play with a temporary stand-in. This is because one of our core players is **currently on vacation, and their remote setup does not allow for the optimal performance and consistent commitment** required for high-level league play and scrims. Despite this temporary adjustment, our collective resolve and performance remain undeterred.
                 </p>
                 <p class="mb-4">
-                    Despite our university commitments, we consistently dedicate significant time to <span class="text-amber-500 font-bold">intensive training, scrims, and meticulous preparation</span> for upcoming tournaments, including the highly anticipated <strong>Major Qualifiers around late August and early September</strong>. Our full, formidable lineup will be back together and actively scrimming starting <strong>August 16th</strong>, ready to push for top placements.
+                    Despite our university commitments, we consistently dedicate significant time to intensive training, scrims, and meticulous preparation. Our full, formidable lineup will be back together and actively scrimming starting **August 16th**. Upon their return, we will immediately initiate intensive preparation for the highly anticipated **Major 2025 Qualifiers**, future **ProHubs Season 2**, and **all upcoming *The Finals* tournaments**, fully committed to pushing for top placements.
                 </p>
                 <p class="mb-4">
-                    Our ultimate goal is to proudly represent a forward-thinking organization and establish ourselves as a leading force in <strong>The Finals</strong> competitive scene. With our relentless drive, combined with a deep understanding of the game and strategic teamwork, we are ready to embrace every challenge and achieve greatness together.
+                    Our ultimate goal is to proudly represent a forward-thinking organization and establish ourselves as a leading force in **The Finals** competitive scene. With our relentless drive, combined with a deep understanding of the game and strategic teamwork, we are ready to embrace every challenge and achieve greatness together.
                 </p>
             </div>
         </div>
@@ -532,7 +556,8 @@
         const heroTitle = document.querySelector('.animate-hero-title');
         const heroSubtitle = document.querySelector('.animate-hero-subtitle');
         const progressBar = document.getElementById('progressBar');
-        const preloader = document.getElementById('preloader'); // Get preloader element
+        const preloader = document.getElementById('preloader');
+        const mainHeader = document.querySelector('.main-header'); // NEW: Get the header element
 
         // Initial hero text animation
         if (heroTitle && heroSubtitle) {
@@ -543,8 +568,7 @@
         // Hide preloader when page is fully loaded
         window.addEventListener('load', () => {
             if (preloader) {
-                preloader.classList.add('hidden-preloader'); // Start fade out
-                // Remove preloader from DOM after transition to ensure it doesn't block clicks
+                preloader.classList.add('hidden-preloader');
                 preloader.addEventListener('transitionend', () => {
                     preloader.remove();
                 }, { once: true });
@@ -646,7 +670,7 @@
             fadeObserver.observe(section);
         });
 
-        // Image proof modal functionality (Updated Logic)
+        // Image proof modal functionality
         const proofModal = document.getElementById('proof-modal');
         const modalImage = document.getElementById('modal-image');
         const closeModalButton = document.getElementById('modal-close-button');
@@ -698,6 +722,13 @@
             // Update Scroll Progress Bar
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             progressBar.style.width = scrollPercent + '%';
+
+            // NEW: Header Shadow on Scroll
+            if (window.scrollY > 50) { // Add shadow after scrolling 50px
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
         });
 
         scrollToTopBtn.addEventListener('click', () => {
@@ -705,6 +736,16 @@
                 top: 0,
                 behavior: 'smooth'
             });
+        });
+
+        // NEW: Add external link icons dynamically
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            // Check if it's not a button or image link, and doesn't already have an icon
+            if (!link.classList.contains('cta-button') && !link.querySelector('img') && !link.querySelector('.external-link-icon')) {
+                const icon = document.createElement('i');
+                icon.classList.add('fas', 'fa-external-link-alt', 'external-link-icon');
+                link.appendChild(icon);
+            }
         });
     });
 </script>
