@@ -216,7 +216,7 @@
                     Our strength lies in our synergy and deep competitive background. Each player brings years of high-level experience and a commitment to excellence. Click on a card to see detailed player history and experience.
                 </p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-8 items-start"> 
                 <div class="player-card bg-slate-50 border border-slate-200 rounded-xl p-6 text-center cursor-pointer hover:shadow-lg hover:border-amber-400 transition-all" data-player="evoluti0n">
                     <h4 class="text-2xl font-bold">Evoluti0N</h4>
                     <p class="text-amber-500 font-semibold mt-1">Medium Class</p>
@@ -431,26 +431,28 @@
             
             // Initial setup: ensure details are hidden and margin is 0
             details.style.height = '0px'; 
-            details.style.marginTop = '0'; // Ensure initial state
+            details.style.marginTop = '0'; // Ensure initial state is fully collapsed
 
             card.addEventListener('click', () => {
-                // Check if the current card's details are visible (height > 0 and not explicitly 0px)
-                const isExpanded = details.scrollHeight > 0 && details.style.height !== '0px';
+                // Check if the current card's details are currently expanded
+                // We rely on details.style.height being non-'0px' to indicate expansion
+                const isCurrentlyExpanded = details.style.height !== '0px';
                 
-                // Collapse all other player cards
+                // Collapse all other player cards, making sure they are reset
                 document.querySelectorAll('.player-card .details').forEach(otherDetails => {
-                    if (otherDetails !== details) { // Don't collapse the clicked card
+                    if (otherDetails !== details) { // Don't touch the clicked card yet
                         otherDetails.style.height = '0px';
                         otherDetails.style.marginTop = '0';
                     }
                 });
 
-                // Toggle the clicked card
-                if (!isExpanded) {
+                // Toggle the clicked card's expansion
+                if (!isCurrentlyExpanded) {
+                    // Expand the clicked card
                     details.style.height = details.scrollHeight + 'px';
-                    details.style.marginTop = '1rem'; // Add margin when expanded
+                    details.style.marginTop = '1rem';
                 } else {
-                    // If it was already expanded, collapse it
+                    // Collapse the clicked card if it was already expanded
                     details.style.height = '0px';
                     details.style.marginTop = '0';
                 }
@@ -517,7 +519,7 @@
                     modalImage.src = imgSrc;
                     proofModal.classList.remove('hidden');
                     proofModal.classList.add('flex'); // Show modal
-                } else if (imgSrc === 'https://i.imgur.com.com/placeholder.png') { // Corrected this line to match the alert for placeholder
+                } else if (imgSrc === 'https://i.imgur.com/placeholder.png') { // Corrected this line to match the alert for placeholder
                     alert('Image proof for this achievement will be added soon.');
                 }
             });
