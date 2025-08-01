@@ -103,6 +103,7 @@
         
         .content-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .content-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+        .player-avatar { object-fit: cover; } /* Ensures images cover the area nicely */
     </style>
 </head>
 <body class="text-slate-800">
@@ -175,7 +176,7 @@
                 </div>
                 <div class="grid md:grid-cols-3 gap-8 items-start"> 
                     <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="evoluti0n">
-                        <img src="https://via.placeholder.com/150/F59E0B/FFFFFF?text=E" alt="Evoluti0N Avatar" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
+                        <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Evoluti0N.jpg?raw=true" alt="Evoluti0N Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
                         <h4 class="text-2xl font-bold">Evoluti0N</h4>
                         <p class="text-amber-600 font-semibold mt-1">Medium Class | Team Captain</p>
                         <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2 text-left">
@@ -194,7 +195,7 @@
                         </div>
                     </div>
                     <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="ireleezi">
-                        <img src="https://via.placeholder.com/150/F59E0B/FFFFFF?text=I" alt="Ireleezi Avatar" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
+                        <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/ireleezi.jpeg?raw=true" alt="Ireleezi Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
                         <h4 class="text-2xl font-bold">Ireleezi</h4>
                         <p class="text-amber-600 font-semibold mt-1">Light Class | Versatile Fragger</p>
                         <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2 text-left">
@@ -209,7 +210,7 @@
                         </div>
                     </div>
                     <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="uwu">
-                        <img src="https://via.placeholder.com/150/F59E0B/FFFFFF?text=U" alt="UwU Avatar" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
+                        <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/uwu.png?raw=true" alt="UwU Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
                         <h4 class="text-2xl font-bold">UwU (Spongebob)</h4>
                         <p class="text-amber-600 font-semibold mt-1">Heavy Class | Leaderboard Dominator</p>
                         <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2 text-left">
@@ -431,9 +432,7 @@
         function onPlayerReady(event) { event.target.mute(); event.target.playVideo(); }
         function onPlayerStateChange(event) { if (event.data === YT.PlayerState.ENDED) { player.playVideo(); } }
 
-        // --- SCRIPT FIXES ARE HERE ---
         document.addEventListener('DOMContentLoaded', () => {
-            // FIX 1: Preloader now hides when the document is ready, not waiting for broken images.
             const preloader = document.getElementById('preloader');
             if (preloader) {
                 preloader.classList.add('hidden-preloader');
