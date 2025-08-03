@@ -31,7 +31,10 @@
 
         .section-intro { max-width: 48rem; margin-left: auto; margin-right: auto; color: #475569; }
         .player-card .details { transition: all 0.4s ease-in-out; }
+        .player-card { position: relative; } /* Added for icon positioning */
         .player-card:hover { transform: translateY(-6px); box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.05); }
+        .card-expand-icon { transition: transform 0.4s ease-in-out; }
+        .player-card.expanded .card-expand-icon { transform: rotate(180deg); }
         .nav-link { transition: color 0.2s ease-in-out, transform 0.2s ease-in-out; }
         .nav-link:hover { color: #f59e0b; transform: translateY(-2px); }
         .active-nav { color: #f59e0b; font-weight: 600; }
@@ -110,7 +113,7 @@
 
     <div id="preloader">
         <div class="flex flex-col items-center">
-            <i class="fas fa-spinner fa-spin text-amber-500 text-5xl"></i>
+            <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" alt="Team Logo" class="h-20 w-20 rounded-full animate-pulse">
             <p class="mt-4 text-lg font-medium text-slate-700">Loading...</p>
         </div>
     </div>
@@ -156,7 +159,7 @@
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight animate-hero-title">Vatican eSport: <span class="text-amber-500">Dedicated & Proven Competitors</span></h2>
                 <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-600 animate-hero-subtitle">
-                    We are a cohesive, battle-hardened roster with LAN experience and an unwavering commitment to victory. As we focus on The Finals' competitive circuit, we are seeking a partnership with a forward-thinking <strong>organization</strong> to accelerate our mutual growth.
+                    We are a cohesive, battle-hardened roster with LAN experience and an unwavering commitment to victory. Focused on <i>The Finals'</i> competitive circuit, we are seeking a partnership with a forward-thinking <strong>organization</strong> to accelerate our mutual growth.
                 </p>
                 <div class="mt-12 flex justify-center items-center gap-4">
                     <a href="#record" class="bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-900 transition-colors cta-button flex items-center cta-pulse">
@@ -176,6 +179,7 @@
                 </div>
                 <div class="grid md:grid-cols-3 gap-8 items-start"> 
                     <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="evoluti0n">
+                        <i class="fas fa-chevron-down card-expand-icon absolute top-4 right-4 text-slate-400"></i>
                         <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Evoluti0N.jpg?raw=true" alt="Evoluti0N Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
                         <h4 class="text-2xl font-bold">Evoluti0N</h4>
                         <p class="text-amber-600 font-semibold mt-1">Medium Class | Team Captain</p>
@@ -195,6 +199,7 @@
                         </div>
                     </div>
                     <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="ireleezi">
+                        <i class="fas fa-chevron-down card-expand-icon absolute top-4 right-4 text-slate-400"></i>
                         <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/ireleezi.jpeg?raw=true" alt="Ireleezi Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
                         <h4 class="text-2xl font-bold">Ireleezi</h4>
                         <p class="text-amber-600 font-semibold mt-1">Light Class | Versatile Fragger</p>
@@ -210,6 +215,7 @@
                         </div>
                     </div>
                     <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="uwu">
+                        <i class="fas fa-chevron-down card-expand-icon absolute top-4 right-4 text-slate-400"></i>
                         <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/uwu.png?raw=true" alt="UwU Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md">
                         <h4 class="text-2xl font-bold">UwU (Spongebob)</h4>
                         <p class="text-amber-600 font-semibold mt-1">Heavy Class | Leaderboard Dominator</p>
@@ -243,7 +249,7 @@
                         </p>
                         <h5 class="font-bold mt-2">CIS League #4</h5>
                         <p class="text-sm text-slate-500 mt-1 flex-grow">First team tournament</p>
-                        <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/image.png?raw=true">View Proof →</span>
+                        <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/image.png?raw=true">View Bracket →</span>
                     </div>
                     <div class="record-card-container bg-slate-50 rounded-xl p-6 text-center border border-slate-200 flex flex-col">
                         <p class="text-5xl font-black text-amber-500 flex items-center justify-center gap-2">
@@ -252,7 +258,7 @@
                         </p>
                         <h5 class="font-bold mt-2">ProHubs S1 Qualifiers</h5>
                         <p class="text-sm text-slate-500 mt-1 flex-grow">Result from official site</p>
-                        <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">View Proof →</span>
+                        <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">See Results →</span>
                         <a href="https://prohubs.tf/phl/season-1/qualifiers/eu" target="_blank" class="text-blue-500 text-sm font-semibold mt-2 inline-block">Visit Qualifier Website →</a>
                     </div>
                     <div class="record-card-container bg-slate-50 rounded-xl p-6 text-center border border-slate-200 flex flex-col">
@@ -271,7 +277,7 @@
                         </p>
                         <h5 class="font-bold mt-2">Global Ranked Placements</h5>
                         <div class="text-sm text-slate-500 mt-1 flex-grow expandable-text">
-                            <p>Our core members consistently achieve top-tier global rankings, with individual skill verifiable on official leaderboards.<span class="extra-content"> (Note: University and work commitments can affect our ability to maintain a consistent top-70 placement.)</span> <span class="read-more-btn">Read More</span></p>
+                            <p>Our core members consistently achieve top-tier global rankings, with individual skill verifiable on official leaderboards.<span class="extra-content"> Our members skillfully balance university and work commitments while maintaining top-tier rankings, demonstrating exceptional time management and dedication to the game.</span> <span class="read-more-btn">Read More</span></p>
                         </div>
                         <a href="https://id.embark.games/the-finals/leaderboards/s7" target="_blank" class="text-amber-600 hover:text-amber-700 text-sm font-semibold mt-3 inline-block">View Leaderboard →</a>
                     </div>
@@ -371,8 +377,8 @@
             <div class="container mx-auto px-6 text-center">
                 <h3 class="section-title text-sky-950">Our Commitment & Readiness</h3>
                 <div class="section-intro mt-4 text-left mx-auto">
-                    <p class="mb-4">At <strong>Vatican eSport</strong>, we are dedicated competitors, fully committed to excelling in this evolving esports ecosystem. Our team has a <strong>proven track record</strong>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full roster. To maintain peak performance, we are temporarily utilizing a stand-in for league play while a core player takes a brief, strategic hiatus to upgrade their remote setup. This decision underscores our commitment to competitive integrity and long-term success.</p>
-                    <p class="mb-4">Despite our university commitments, we consistently dedicate significant time to intensive training and meticulous preparation. Our full, formidable lineup will be back together and actively scrimming starting <strong>August 16th</strong>. Upon their return, we will immediately initiate intensive preparation for the highly anticipated <strong>Major 2025 Qualifiers</strong>, future <strong>ProHubs Season 2</strong>, and all upcoming <strong>The Finals</strong> tournaments.</p>
+                    <p class="mb-4">At <strong>Vatican eSport</strong>, we are dedicated competitors, fully committed to excelling in this evolving esports ecosystem. Our team has a <strong>proven track record</strong>, securing 3rd place in the ProHubs Season 1 Qualifiers with our full roster. To maintain peak performance, we are temporarily utilizing a stand-in for league play while a core player is taking a brief, strategic hiatus to upgrade their remote setup, a decision made to guarantee peak technical performance for all future competitions.</p>
+                    <p class="mb-4">Despite our university commitments, we consistently dedicate significant time to intensive training and meticulous preparation. Our full, formidable lineup will reconvene for intensive scrimming on <strong>August 16th</strong>, immediately beginning our preparation for the highly anticipated <strong>Major 2025 Qualifiers</strong>, future <strong>ProHubs Season 2</strong>, and all upcoming <strong>The Finals</strong> tournaments.</p>
                     <p class="mb-4">Our ultimate goal is to proudly represent a forward-thinking <strong>organization</strong> and establish ourselves as a leading force in <strong>The Finals</strong> competitive scene. With our relentless drive, combined with a deep understanding of the game and strategic teamwork, we are ready to embrace every challenge and achieve greatness together.</p>
                 </div>
             </div>
@@ -392,7 +398,7 @@
                         <p class="text-lg font-bold text-white">Vatican <span class="text-amber-500">eSport</span></p>
                     </a>
                 </div>
-                <p class="text-sm text-slate-400 order-last md:order-none">© 2025 Vatican eSport | Note: 'Vatican eSport' is a placeholder team name.</p>
+                <p class="text-sm text-slate-400 order-last md:order-none">© 2025 Vatican eSport</p>
                 <div class="flex items-center gap-4">
                     <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-amber-400 transition-colors cta-button flex items-center justify-center cta-pulse">
                         <i class="fas fa-envelope mr-2"></i> <span>Email Us</span>
@@ -435,8 +441,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             const preloader = document.getElementById('preloader');
             if (preloader) {
-                preloader.classList.add('hidden-preloader');
-                preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
+                // Add a slight delay to ensure content is loaded before fading out
+                setTimeout(() => {
+                    preloader.classList.add('hidden-preloader');
+                    preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
+                }, 500);
             }
             
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -464,9 +473,16 @@
                 details.style.marginTop = '0';
                 card.addEventListener('click', () => {
                     const isCurrentlyExpanded = details.style.height !== '0px';
-                    document.querySelectorAll('.player-card .details').forEach(d => {
-                        if (d !== details) { d.style.height = '0px'; d.style.marginTop = '0'; }
+                    
+                    document.querySelectorAll('.player-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('expanded');
+                            otherCard.querySelector('.details').style.height = '0px';
+                            otherCard.querySelector('.details').style.marginTop = '0';
+                        }
                     });
+
+                    card.classList.toggle('expanded');
                     details.style.height = isCurrentlyExpanded ? '0px' : details.scrollHeight + 'px';
                     details.style.marginTop = isCurrentlyExpanded ? '0' : '1rem';
                 });
@@ -554,4 +570,3 @@
     </script>
 </body>
 </html>
-
