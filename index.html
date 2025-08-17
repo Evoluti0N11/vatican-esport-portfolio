@@ -6,47 +6,71 @@
     <title>Vatican Esports</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://img.youtube.com">
     <link rel="preconnect" href="https://s.ytimg.com">
     <link rel="preconnect" href="https://yt3.ggpht.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Removed Font Awesome CSS link to reduce render-blocking resources and unused CSS -->
-    <!-- To further optimize PageSpeed, generate minimal Tailwind CSS using Tailwind Play (play.tailwindcss.com): paste your HTML, get the CSS, and replace the script with <style>/* generated CSS */</style> in the head. This will eliminate the 123KiB JS download and client-side generation. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com/3.4.10"></script>
+    <style>
+        @font-face {
+            font-family: "Font Awesome 6 Brands";
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/webfonts/fa-brands-400.woff2") format("woff2");
+        }
+        @font-face {
+            font-family: "Font Awesome 6 Solid";
+            font-style: normal;
+            font-weight: 900;
+            font-display: swap;
+            src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/webfonts/fa-solid-900.woff2") format("woff2");
+        }
+        .fade-in-section {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body class="text-slate-800 antialiased">
     <header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="#hero" class="flex items-center gap-3">
-                <span class="font-bold text-xl text-amber-700">Vatican Esports∗</span> <!-- Darkened color for better contrast -->
+            <a href="#hero" class="flex items-center gap-3 active-nav">
+                <span class="font-bold text-xl text-amber-700">Vatican Esports∗</span> <!-- Darkened for better contrast -->
             </a>
             <nav class="hidden md:flex gap-6">
-                <a href="#roster" class="hover:text-amber-700">Roster</a>
-                <a href="#record" class="hover:text-amber-700">Record</a>
-                <a href="#partnership" class="hover:text-amber-700">Partnership</a>
-                <a href="#esport" class="hover:text-amber-700">The Esport</a>
-                <a href="#commitment" class="hover:text-amber-700">Our Commitment</a>
+                <a href="#roster" class="hover:text-amber-600">Roster</a>
+                <a href="#record" class="hover:text-amber-600">Record</a>
+                <a href="#partnership" class="hover:text-amber-600">Partnership</a>
+                <a href="#esport" class="hover:text-amber-600">The Esport</a>
+                <a href="#commitment" class="hover:text-amber-600">Our Commitment</a>
             </nav>
             <a href="#contact" class="bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600">Contact Us</a>
         </div>
     </header>
 
-    <section id="hero" class="py-24 md:py-36 bg-white fade-in-section">
+    <section id="hero" class="py-24 md:py-36 fade-in-section bg-white">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Vatican Esports∗: Dedicated & Proven Competitors</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Vatican Esports∗: <span class="text-amber-600">Dedicated & Proven Competitors</span></h1> <!-- Adjusted color for contrast -->
             <p class="text-xl mb-8">We are a cohesive roster with proven LAN experience and a strong commitment to success. Specializing in The Finals' competitive scene, we seek a partnership with a forward-thinking organization to achieve mutual growth.</p>
             <a href="#record" class="bg-amber-500 text-white px-6 py-3 rounded-lg hover:bg-amber-600">View Our Track Record</a>
         </div>
     </section>
 
-    <section id="roster" class="py-16 bg-slate-50">
+    <section id="roster" class="py-16 bg-slate-50 fade-in-section">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8 text-center">Meet the Roster</h2>
             <p class="text-center mb-12">Our team's strength is built on synergy and shared competitive history. Each player brings years of high-level gameplay and a professional mindset to the table. Click any card for more details.</p>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center" data-player="evoluti0n">
+                <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="evoluti0n">
                     <h3 class="font-bold text-xl">Evoluti0N</h3>
-                    <p class="text-amber-800 font-semibold mt-1">Medium Class | Team Captain</p> <!-- Darkened for better contrast -->
+                    <p class="text-amber-600 font-semibold mt-1">Medium Class | Team Captain</p>
                     <p>Nationality: 🇪🇸🇮🇹 Spanish-Italian</p>
                     <p>Age: 24</p>
                     <p>Competitive Highlights:</p>
@@ -60,9 +84,9 @@
                     </ul>
                     <p>Discord: evoluti0n11</p>
                 </div>
-                <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center" data-player="ireleezi">
+                <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="ireleezi">
                     <h3 class="font-bold text-xl">Ireleezi</h3>
-                    <p class="text-amber-800 font-semibold mt-1">Light Class | Versatile Fragger</p>
+                    <p class="text-amber-600 font-semibold mt-1">Light Class | Versatile Fragger</p>
                     <p>Nationality: 🇮🇪 Irish</p>
                     <p>Age: 22</p>
                     <p>Competitive Highlights:</p>
@@ -72,9 +96,9 @@
                     </ul>
                     <p>Discord: ireleezi</p>
                 </div>
-                <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center" data-player="uwu">
+                <div class="player-card bg-white border border-slate-200 rounded-xl p-6 text-center cursor-pointer" data-player="uwu">
                     <h3 class="font-bold text-xl">UwU (Spongebob)</h3>
-                    <p class="text-amber-800 font-semibold mt-1">Heavy Class | Leaderboard Dominator</p>
+                    <p class="text-amber-600 font-semibold mt-1">Heavy Class | Leaderboard Dominator</p>
                     <p>Nationality: 🇳🇱 Dutch</p>
                     <p>Age: 20</p>
                     <p>Competitive Highlights:</p>
@@ -87,41 +111,41 @@
         </div>
     </section>
 
-    <section id="record" class="py-16 bg-white">
+    <section id="record" class="py-16 bg-white fade-in-section">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8 text-center">Competitive Track Record</h2>
             <p class="text-center mb-12">Our dedication has yielded consistent, high-level results. This section outlines our key achievements in The Finals. Click to view proof where available.</p>
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
-                    <h4 class="text-4xl font-bold text-amber-700">3rd</h4> <!-- Changed to h4 for sequential order, assumed 0rd was placeholder for 3rd -->
-                    <p class="font-bold mt-2">CIS League #4</p>
+                    <h3 class="text-4xl font-bold text-amber-600">3rd</h3>
+                    <h4 class="font-bold mt-2">CIS League #4</h4>
                     <p>A strong debut in our first team tournament.</p>
-                    <a href="#" class="text-amber-700 hover:underline">View Bracket →</a>
+                    <a href="#" class="text-amber-600 hover:underline">View Bracket →</a>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
-                    <h4 class="text-4xl font-bold text-amber-700">3rd</h4>
-                    <p class="font-bold mt-2">ProHubs S1 Qualifiers</p>
+                    <h3 class="text-4xl font-bold text-amber-600">3rd</h3>
+                    <h4 class="font-bold mt-2">ProHubs S1 Qualifiers</h4>
                     <p>Secured qualification via the official tournament portal.</p>
-                    <a href="#" class="text-amber-700 hover:underline">See Results →</a>
-                    <a href="#" class="text-amber-700 hover:underline">Visit Qualifier Website →</a>
+                    <a href="#" class="text-amber-600 hover:underline">See Results →</a>
+                    <a href="#" class="text-amber-600 hover:underline">Visit Qualifier Website →</a>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
-                    <h4 class="text-4xl font-bold text-amber-700">Top 8</h4> <!-- Assumed placeholder -->
-                    <p class="font-bold mt-2">ProHubs S1 League Play LIVE</p>
+                    <h3 class="text-4xl font-bold text-amber-600">Top 8</h3>
+                    <h4 class="font-bold mt-2">ProHubs S1 League Play LIVE</h4>
                     <p>Current placement (competing with a stand-in).</p>
-                    <a href="#" class="text-amber-700 hover:underline">View on Liquipedia →</a>
+                    <a href="#" class="text-amber-600 hover:underline">View on Liquipedia →</a>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
-                    <h4 class="text-4xl font-bold text-amber-700">Top 100</h4> <!-- Assumed placeholder -->
-                    <p class="font-bold mt-2">Global Ranked Placements</p>
+                    <h3 class="text-4xl font-bold text-amber-600">Top 100</h3>
+                    <h4 class="font-bold mt-2">Global Ranked Placements</h4>
                     <p>Our core members consistently achieve top global rankings, verifiable on official leaderboards. We effectively balance university and work to maintain these high rankings, demonstrating exceptional time management and focus. Read More</p>
-                    <a href="#" class="text-amber-700 hover:underline">View Leaderboard →</a>
+                    <a href="#" class="text-amber-600 hover:underline">View Leaderboard →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="partnership" class="py-16 bg-slate-50">
+    <section id="partnership" class="py-16 bg-slate-50 fade-in-section">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8 text-center">Partnership Value</h2>
             <p class="text-center mb-12">A partnership with our team offers clear, mutual benefits built on a foundation of dedication, growth, and shared success. We provide tangible value that extends beyond in-game performance.</p>
@@ -142,7 +166,7 @@
         </div>
     </section>
 
-    <section id="content" class="py-16 bg-white">
+    <section id="content" class="py-16 bg-white fade-in-section">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8 text-center">Content & Community</h2>
             <p class="text-center mb-12">Performance is paramount, but building connections is vital. We are focused on creating engaging content to build strong community ties, providing our partners with authentic outreach.</p>
@@ -150,33 +174,34 @@
                 <div class="bg-white border border-slate-200 rounded-xl p-6">
                     <h3 class="font-bold text-xl mb-4">Evoluti0N's Content</h3>
                     <p>Equipped with a dual PC setup for high-quality, reliable streaming. Ready to stream on any preferred platform to support our partners' goals.</p>
-                    <a href="#" class="text-amber-700 hover:underline">View on Twitch</a>
+                    <a href="#" class="text-amber-600 hover:underline">View on Twitch</a>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-xl p-6">
                     <h3 class="font-bold text-xl mb-4">Ireleezi's Content</h3>
                     <p>Creates regular streams and short-form video content to connect directly with the community and build a loyal following.</p>
-                    <a href="#" class="text-amber-700 hover:underline">Twitch</a>
-                    <a href="#" class="text-amber-700 hover:underline">TikTok</a>
+                    <a href="#" class="text-amber-600 hover:underline">Twitch</a>
+                    <a href="#" class="text-amber-600 hover:underline">TikTok</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="esport" class="py-16 bg-slate-50 relative">
+    <section id="esport" class="py-16 bg-slate-50 relative fade-in-section">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8">The Finals: A New Era of Esports</h2>
             <p class="mb-4">The Finals is revolutionizing the FPS genre with fully destructible environments, creating unparalleled strategic depth and a thrilling spectator experience.</p>
             <p class="mb-4">The competitive scene is rapidly expanding, highlighted by an official Major in 2025 with a $100,000 prize pool. Qualifiers begin this August, culminating in a live final at DreamHack Stockholm.</p>
             <p class="mb-8">The entry of major organizations like Spacestation Gaming (SSG) and OpTic Gaming signifies the game's immense potential, attracting top-tier talent and accelerating the growth of the entire ecosystem.</p>
-            <div class="aspect-w-16 aspect-h-9">
-                <iframe loading="lazy" src="https://www.youtube.com/embed/RFlxLo5GJMo?rel=0&autoplay=1&mute=1&loop=1&playlist=RFlxLo5GJMo" title="The Finals Official Reveal Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-                <!-- Added loading="lazy" to defer loading until visible, reducing initial load time and third-party JS impact -->
+            <div id="video-placeholder" class="relative aspect-video cursor-pointer" style="background-image: url('https://img.youtube.com/vi/RFlxLo5GJMo/maxresdefault.jpg'); background-size: cover; background-position: center;">
+                <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                    <i class="fas fa-play text-white text-6xl opacity-80"></i>
+                </div>
             </div>
             <p class="text-sm mt-4">Background video: "The Finals Official Reveal Trailer" by THE FINALS. All rights reserved by Embark Studios.</p>
         </div>
     </section>
 
-    <section id="commitment" class="py-16 bg-white">
+    <section id="commitment" class="py-16 bg-white fade-in-section">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8">Our Commitment & Readiness</h2>
             <p class="text-xl mb-8">At Vatican Esports∗, we are deeply committed competitors dedicated to achieving excellence in this developing esport. We have a proven track record of high-level performance, including a 3rd place finish in the ProHubs Season 1 Qualifiers with our complete roster.</p>
@@ -191,21 +216,48 @@
             <p class="mb-8">We bring the skill, experience, and professional focus required to win. Let's discuss how our roster can represent your organization and achieve greatness together. Contact us to begin the conversation.</p>
             <div class="flex flex-col md:flex-row justify-center gap-4 mb-8">
                 <a href="mailto:ciampichiniluca@gmail.com" class="bg-amber-500 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-amber-600 flex items-center justify-center" aria-label="Email Us">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="inline mr-2" viewBox="0 0 16 16">
-                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
-                    </svg>
-                    Email Us
+                    <i class="fas fa-envelope mr-2"></i> Email Us
                 </a>
                 <a href="https://x.com/Evoluti0N11" target="_blank" class="bg-blue-500 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-blue-600 flex items-center justify-center" aria-label="Follow on X">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="inline mr-2" viewBox="0 0 16 16">
-                        <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
-                    </svg>
-                    Follow on X
+                    <i class="fa-brands fa-x-twitter mr-2"></i> Follow on X
                 </a>
             </div>
             <p>© 2025 Vatican Esports</p>
             <p class="text-sm mt-4">Note: "Vatican Esports" is a placeholder name used during multiple competitions. We do not own any rights to it and are not directly connected with Vatican City.</p>
         </div>
     </footer>
+
+    <script>
+        // Fade-in animations
+        function fadeInOnScroll() {
+            const sections = document.querySelectorAll('.fade-in-section');
+            const options = {
+                threshold: 0.1
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+            sections.forEach(section => observer.observe(section));
+        }
+        fadeInOnScroll();
+
+        // Video lazy load on click
+        document.getElementById('video-placeholder').addEventListener('click', function() {
+            this.innerHTML = '<iframe class="w-full h-full" src="https://www.youtube.com/embed/RFlxLo5GJMo?rel=0&autoplay=1&mute=1&loop=1&playlist=RFlxLo5GJMo" title="The Finals Official Reveal Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        });
+
+        // Optional: Player card click (if you want to add expansion, but keeping simple as original)
+        document.querySelectorAll('.player-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // Could toggle a class for more details if added, but original doesn't specify
+                console.log('Player details for ' + card.dataset.player);
+            });
+        });
+    </script>
 </body>
 </html>
