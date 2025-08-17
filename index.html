@@ -117,6 +117,7 @@
         .player-avatar { object-fit: cover; } /* Ensures images cover the area nicely */
         
         sup > a { text-decoration: none; }
+        sup { font-size: 0.75em; vertical-align: baseline; position: relative; top: -0.3em; } /* Fixed asterisk sizing/positioning */
 
         /* New effect: Staggered fade-in for roster cards */
         .grid > div:nth-child(1) { animation-delay: 0.1s; }
@@ -149,7 +150,7 @@
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#hero" class="flex items-center gap-3">
                 <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" alt="Vatican Esports Team Logo" class="h-10 w-10 rounded-full" loading="lazy">
-                <h1 class="text-xl font-bold text-slate-900 hidden sm:block">Vatican <span class="text-amber-500">Esports</span><sup><a href="#disclaimer-note" title="Disclaimer about placeholder name" class="text-amber-500 hover:text-amber-600">&lowast;</a></sup></h1>
+                <h1 class="text-xl font-bold text-slate-900 hidden sm:block">Vatican <span class="text-amber-700">Esports</span><sup><a href="#disclaimer-note" title="Disclaimer about placeholder name" class="text-amber-700 hover:text-amber-800">&lowast;</a></sup></h1> <!-- Darkened amber -->
             </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#roster" class="nav-link text-slate-600 font-medium"><i class="fas fa-user-group mr-1"></i>Roster</a> <!-- Improved icon -->
@@ -182,7 +183,7 @@
     <main>
         <section id="hero" class="py-24 md:py-36 fade-in-section bg-white">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight animate-hero-title">Vatican Esports<sup><a href="#disclaimer-note" title="Disclaimer about placeholder name" class="text-amber-500 hover:text-amber-600">&lowast;</a></sup>: <span class="text-amber-500">Dedicated & Proven Competitors</span></h2>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight animate-hero-title">Vatican Esports<sup><a href="#disclaimer-note" title="Disclaimer about placeholder name" class="text-amber-700 hover:text-amber-800">&lowast;</a></sup>: <span class="text-amber-700">Dedicated & Proven Competitors</span></h2> <!-- Darkened amber -->
                 <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-600 animate-hero-subtitle">
                     Our roster is cohesive, with proven LAN experience and a strong commitment to success. Specializing in the competitive scene of <i>The Finals</i>, we seek partnership with a forward-thinking organization for mutual growth.
                 </p>
@@ -207,7 +208,7 @@
                         <i class="fas fa-chevron-down card-expand-icon absolute top-4 right-4 text-slate-400"></i>
                         <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Evoluti0N.jpg?raw=true" alt="Evoluti0N Player Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md" loading="lazy">
                         <h4 class="text-2xl font-bold">Evoluti0N</h4>
-                        <p class="text-amber-600 font-semibold mt-1">Medium Class | Team Captain</p>
+                        <p class="text-amber-800 font-semibold mt-1">Medium Class | Team Captain</p> <!-- Darkened for contrast -->
                         <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2 text-left">
                             <p><strong>Nationality:</strong> 🇪🇸🇮🇹 Spanish-Italian</p>
                             <p><strong>Age:</strong> 24</p>
@@ -227,7 +228,7 @@
                         <i class="fas fa-chevron-down card-expand-icon absolute top-4 right-4 text-slate-400"></i>
                         <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/ireleezi.jpeg?raw=true" alt="Ireleezi Player Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md" loading="lazy">
                         <h4 class="text-2xl font-bold">Ireleezi</h4>
-                        <p class="text-amber-600 font-semibold mt-1">Light Class | Versatile Fragger</p>
+                        <p class="text-amber-800 font-semibold mt-1">Light Class | Versatile Fragger</p> <!-- Darkened for contrast -->
                         <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2 text-left">
                             <p><strong>Nationality:</strong> 🇮🇪 Irish</p>
                             <p><strong>Age:</strong> 22</p>
@@ -243,7 +244,7 @@
                         <i class="fas fa-chevron-down card-expand-icon absolute top-4 right-4 text-slate-400"></i>
                         <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/uwu.png?raw=true" alt="UwU Player Avatar" class="player-avatar w-24 h-24 rounded-full mx-auto mb-4 border-4 border-amber-400 shadow-md" loading="lazy">
                         <h4 class="text-2xl font-bold">UwU (Spongebob)</h4>
-                        <p class="text-amber-600 font-semibold mt-1">Heavy Class | Leaderboard Dominator</p>
+                        <p class="text-amber-800 font-semibold mt-1">Heavy Class | Leaderboard Dominator</p> <!-- Darkened for contrast -->
                         <div class="details h-0 overflow-hidden mt-4 text-slate-600 space-y-2 text-left">
                             <p><strong>Nationality:</strong> 🇳🇱 Dutch</p>
                             <p><strong>Age:</strong> 20</p>
@@ -272,7 +273,7 @@
                             <i class="fas fa-trophy text-4xl"></i>
                             <span class="counter-number" data-target="3">0</span><span class="text-3xl">rd</span>
                         </p>
-                        <h5 class="font-bold mt-2">CIS League #4</h5>
+                        <h4 class="font-bold mt-2">CIS League #4</h4> <!-- Changed to h4 for sequential order -->
                         <p class="text-sm text-slate-500 mt-1 flex-grow">A strong showing in our first team tournament.</p>
                         <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/image.png?raw=true">View Bracket →</span>
                     </div>
@@ -281,7 +282,7 @@
                             <i class="fas fa-medal text-4xl"></i>
                             <span class="counter-number" data-target="3">0</span><span class="text-3xl">rd</span>
                         </p>
-                        <h5 class="font-bold mt-2">ProHubs S1 Qualifiers</h5>
+                        <h4 class="font-bold mt-2">ProHubs S1 Qualifiers</h4> <!-- Changed to h4 -->
                         <p class="text-sm text-slate-500 mt-1 flex-grow">Qualified through the official tournament portal.</p>
                         <span class="proof-trigger proof-link text-amber-600 text-sm font-semibold mt-3 inline-block cursor-pointer" data-img-src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/Screenshot%202025-07-21%20234919.png?raw=true">See Results →</span>
                         <a href="https://prohubs.tf/phl/season-1/qualifiers/eu" target="_blank" class="text-blue-500 text-sm font-semibold mt-2 inline-block">Visit Qualifier Website →</a>
@@ -291,7 +292,7 @@
                             <i class="fas fa-chart-line text-4xl"></i>
                             <span>Top <span class="counter-number" data-target="9">0</span></span>
                         </p>
-                        <h5 class="font-bold mt-2 flex items-center justify-center">ProHubs S1 League Play <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-red-500 text-white live-indicator"><span class="h-2 w-2 rounded-full bg-white mr-1"></span> LIVE</span></h5>
+                        <h4 class="font-bold mt-2 flex items-center justify-center">ProHubs S1 League Play <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-red-500 text-white live-indicator"><span class="h-2 w-2 rounded-full bg-white mr-1"></span> LIVE</span></h4> <!-- Changed to h4 -->
                         <p class="text-sm text-slate-500 mt-1 flex-grow">Current placement (using a stand-in).</p>
                         <a href="https://liquipedia.net/lab/Thefinals/ProHubs.TF/S1/Europe" target="_blank" class="text-amber-600 hover:text-amber-700 text-sm font-semibold mt-3 inline-block">View on Liquipedia →</a>
                     </div>
@@ -300,7 +301,7 @@
                             <i class="fas fa-globe text-4xl"></i>
                             <span>Top <span class="counter-number" data-target="200">0</span></span>
                         </p>
-                        <h5 class="font-bold mt-2">Global Ranked Placements</h5>
+                        <h4 class="font-bold mt-2">Global Ranked Placements</h4> <!-- Changed to h4 -->
                         <div class="text-sm text-slate-500 mt-1 flex-grow expandable-text">
                             <p>Our core members regularly achieve top global rankings, verifiable on official leaderboards.<span class="extra-content"> We balance university and work commitments to sustain these rankings, showcasing our time management and dedication.</span> <span class="read-more-btn">Read More</span></p>
                         </div>
@@ -403,7 +404,7 @@
             <div class="container mx-auto px-6 text-center">
                 <h3 class="section-title text-sky-950">Our Commitment & Readiness</h3>
                 <div class="section-intro mt-4 text-left mx-auto">
-                    <p class="mb-4">At <strong>Vatican Esports<sup><a href="#disclaimer-note" title="Disclaimer about placeholder name" class="text-amber-500 hover:text-amber-600">&lowast;</a></sup></strong>, we are committed competitors focused on excellence in this emerging esport. With a proven track record, including 3rd place in ProHubs Season 1 Qualifiers with our full roster, we balance university and work while maintaining competitive form.</p>
+                    <p class="mb-4">At <strong>Vatican Esports<sup><a href="#disclaimer-note" title="Disclaimer about placeholder name" class="text-amber-700 hover:text-amber-800">&lowast;</a></sup></strong>, we are committed competitors focused on excellence in this emerging esport. With a proven track record, including 3rd place in ProHubs Season 1 Qualifiers with our full roster, we balance university and work while maintaining competitive form.</p> <!-- Darkened amber -->
                     <p class="mb-4">Our complete lineup resumes scrims on <strong>August 16, 2025</strong>, gearing up for the <strong>Major 2025 Qualifiers</strong>, <strong>ProHubs Season 2</strong>, and other top <i>The Finals</i> events. We are eager to represent a supportive organization, enhancing its legacy and the <i>The Finals</i> community through strategic play, expertise, and teamwork.</p>
                 </div>
             </div>
@@ -420,7 +421,7 @@
                 <div class="flex items-center gap-3">
                     <a href="#hero" class="flex items-center gap-3">
                         <img src="https://github.com/Evoluti0N11/vatican-esport-portfolio/blob/main/vatican-3bafff2e.jpeg?raw=true" alt="Vatican Esports Team Logo" class="h-10 w-10 rounded-full" loading="lazy">
-                        <p class="text-lg font-bold text-white">Vatican <span class="text-amber-500">Esports</span><sup><a href="#disclaimer-note" title="Disclaimer about placeholder name" class="text-amber-500 hover:text-amber-600">&lowast;</a></sup></p>
+                        <p class="text-lg font-bold text-white">Vatican <span class="text-amber-700">Esports</span><sup><a href="#disclaimer-note" title="Disclaimer about placeholder name" class="text-amber-700 hover:text-amber-800">&lowast;</a></sup></p> <!-- Darkened amber -->
                     </a>
                 </div>
                 <p class="text-sm text-slate-400 order-last md:order-none">© 2025 Vatican Esports</p>
