@@ -3,98 +3,742 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Italia: El Silencio en los Parques</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <title>Plan de Negocio: Good Rebels</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* --- Variables Globales --- */
+        :root {
+            --primary-red: #E3262E;
+            --dark-bg: #1A1E21;
+            --text-dark: #222222;
+            --text-medium: #444444;
+            --white: #FFFFFF;
+            --light-grey: #F4F6F8;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-color: #f9f9f9; /* Papel suave */
-            font-family: 'Lato', sans-serif;
-            color: #333;
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            background-color: var(--dark-bg);
+            color: var(--text-dark);
+            height: 100vh;
+            width: 100vw;
+            line-height: 1.6;
         }
-        .article-container {
-            max-width: 1000px;
-            width: 100%;
-            background: white;
-            padding: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-        /* Estilos Periodísticos */
-        .kicker {
-            font-size: 12px;
+
+        /* --- Tipografía --- */
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #A93226; /* Tu rojo del gráfico */
-            font-weight: 700;
-            margin-bottom: 10px;
-            display: block;
+            letter-spacing: 1px;
         }
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            margin: 0 0 20px 0;
-            line-height: 1.1;
-            color: #1a1a1a;
-        }
-        .lead {
-            font-size: 20px;
-            font-weight: 300;
-            line-height: 1.5;
-            color: #555;
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
             margin-bottom: 30px;
-            max-width: 80%;
+            position: relative;
         }
-        .byline {
-            font-size: 14px;
-            color: #888;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .byline strong { color: #333; }
         
-        /* Footer técnico */
-        .footer-note {
-            margin-top: 30px;
-            font-size: 12px;
-            color: #999;
-            text-align: right;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
+        h2::after {
+            content: ''; position: absolute; bottom: -10px; left: 0;
+            width: 60px; height: 4px; background-color: var(--primary-red);
+        }
+
+        p { font-weight: 400; color: var(--text-medium); font-size: 0.95rem; }
+        strong { font-weight: 700; color: var(--text-dark); }
+
+        /* --- Slider --- */
+        .slider-container { position: relative; width: 100%; height: 100%; }
+
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            display: flex; flex-direction: column;
+            background-color: var(--white);
+            transform: scale(1.02);
+            padding: 60px 100px;
+            overflow-y: auto;
+        }
+
+        .slide.active { opacity: 1; visibility: visible; transform: scale(1); z-index: 10; }
+
+        /* --- Logo --- */
+        .logo-gr {
+            position: absolute; top: 30px; right: 40px; width: 60px; height: auto;
+            z-index: 20; cursor: pointer;
+        }
+        .logo-img-dynamic {
+            width: 100%; height: auto;
+            filter: grayscale(100%) brightness(2) opacity(0.8);
+            transition: all 0.4s ease;
+        }
+        .logo-gr:hover .logo-img-dynamic { filter: none; opacity: 1; transform: rotate(-10deg); }
+
+        /* --- Controles --- */
+        .controls {
+            position: absolute; bottom: 30px; right: 40px; display: flex; gap: 20px; z-index: 100;
+        }
+        .btn-nav {
+            width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; font-size: 1.2rem; outline: none;
+        }
+        .btn-prev { background-color: var(--white); color: var(--text-dark); box-shadow: var(--shadow-soft); }
+        .btn-next { background-color: var(--primary-red); color: var(--white); box-shadow: 0 4px 15px rgba(227, 38, 46, 0.4); }
+        .btn-nav:hover { transform: translateY(-3px); }
+
+        /* --- ESTILOS ESPECÍFICOS --- */
+
+        /* SLIDE 1: PORTADA */
+        #slide-1 {
+            background: linear-gradient(135deg, rgba(26, 30, 33, 0.9) 0%, rgba(227, 38, 46, 0.2) 100%), 
+                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            color: white; justify-content: center; padding-left: 10%;
+        }
+        .tag {
+            background-color: var(--primary-red); color: white; padding: 8px 20px;
+            font-size: 0.9rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; display: inline-block; margin-bottom: 30px;
+        }
+        .main-title { font-size: 6rem; line-height: 0.9; margin-bottom: 30px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .sub-title {
+            font-size: 1.5rem; font-weight: 300; border-left: 5px solid var(--primary-red);
+            padding-left: 30px; color: rgba(255,255,255,0.9);
+        }
+
+        /* SLIDE 2: INDICE (ROADMAP) */
+        #slide-2 { justify-content: center; }
+        .roadmap-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; 
+            max-height: 80vh; overflow-y: auto;
+        }
+        a.roadmap-item {
+            padding: 15px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;
+            font-size: 1rem; color: var(--text-medium); text-decoration: none; cursor: pointer; transition: all 0.4s ease;
+        }
+        a.roadmap-item.future { cursor: default; opacity: 0.6; }
+        a.roadmap-item.future:hover { transform: none; color: var(--text-medium); border-bottom-color: #eee; }
+        
+        .roadmap-number {
+            font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 700; color: #e0e0e0;
+            margin-right: 15px; width: 30px; transition: all 0.4s ease; flex-shrink: 0;
+        }
+        a.roadmap-item:not(.future):hover { color: var(--text-dark); transform: translateX(10px); border-bottom-color: var(--primary-red); }
+        a.roadmap-item:not(.future):hover .roadmap-number { color: var(--primary-red); }
+
+        /* SLIDE 3: POR QUÉ */
+        #slide-3 { justify-content: center; background-color: var(--light-grey); }
+        .cards-container { display: flex; justify-content: space-between; gap: 30px; margin-top: 40px; }
+        .card {
+            flex: 1; background: white; padding: 40px 30px; box-shadow: var(--shadow-soft);
+            border-radius: 8px; transition: all 0.4s ease; border-top: 4px solid transparent;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-top-color: var(--primary-red); }
+        .card-icon { font-size: 2.5rem; color: var(--primary-red); margin-bottom: 20px; }
+        .card h3 { font-size: 1.3rem; margin-bottom: 15px; }
+
+        /* SLIDE 4: SUMARIO */
+        .img-grid { display: flex; gap: 20px; height: 50vh; margin-top: 40px; }
+        .img-card { flex: 1; position: relative; overflow: hidden; border-radius: 8px; cursor: pointer; box-shadow: var(--shadow-soft); }
+        .img-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .img-card:hover img { transform: scale(1.05); }
+        .overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.6) 100%); color: white;
+            transition: all 0.4s ease;
+        }
+        .img-card:hover .overlay { padding-bottom: 40px; background: linear-gradient(to top, #E3262E 20%, rgba(227, 38, 46, 0.7) 100%); }
+        .overlay h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .overlay p { color: #f0f0f0; text-shadow: 0 1px 2px rgba(0,0,0,0.5); font-weight: 500; font-size: 0.9rem; }
+
+        /* SLIDE 5: LEGAL (Info Básica) - ESTILOS CORREGIDOS */
+        #slide-5 { padding: 0; flex-direction: row; }
+        .split-container { display: flex; width: 100%; height: 100%; }
+        
+        .split-left {
+            width: 45%; background-color: var(--dark-bg); color: var(--white);
+            padding: 60px 50px; display: flex; flex-direction: column; justify-content: center;
+        }
+        /* Corrección de contraste forzosa */
+        .split-left strong { color: #ffffff !important; font-weight: 700; }
+        .split-left p { color: #e0e0e0 !important; font-size: 0.95rem; line-height: 1.6; }
+        .split-left em { color: #bbbbbb !important; }
+        
+        .split-right {
+            width: 55%; position: relative;
+            background: url('https://www.goodrebels.com/wp-content/uploads/2024/06/gr_bcorp-3.png') center/cover;
+        }
+        .split-right::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(227, 38, 46, 0.85); mix-blend-mode: multiply;
+        }
+        .split-content-right {
+            position: relative; z-index: 2; height: 100%; padding: 60px 50px;
+            display: flex; flex-direction: column; justify-content: center; color: var(--white);
+        }
+        
+        .info-block-lg { margin-bottom: 40px; border-left: 3px solid rgba(255,255,255,0.3); padding-left: 20px; }
+        
+        /* Etiquetas en Rojo para máximo contraste */
+        .info-label-lg { 
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; 
+            color: var(--primary-red); 
+            text-transform: uppercase; margin-bottom: 8px; display: block;
+        }
+        
+        .info-title-lg { font-family: 'Oswald', sans-serif; font-size: 2rem; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: white; }
+
+        /* SLIDE 6: IDENTIDAD */
+        #slide-6 { background-color: var(--white); }
+        .identity-layout { display: flex; gap: 50px; align-items: center; margin-top: 30px; height: 80%; }
+        .identity-content { flex: 3; }
+        .identity-visual-col { flex: 2; display: flex; justify-content: center; align-items: center; }
+        .mission-vision-box { padding: 20px 0; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+        .mission-vision-box h3 { color: var(--primary-red); margin-bottom: 8px; font-size: 1.3rem; border-left: 5px solid var(--primary-red); padding-left: 15px; }
+        .mission-vision-box p { font-size: 1rem; color: var(--text-medium); padding-left: 20px; }
+        .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .value-pill {
+            background: var(--light-grey); padding: 15px; text-align: center;
+            font-weight: 700; border-radius: 4px; color: var(--text-dark); transition: all 0.3s;
+        }
+        .value-pill:hover { background: var(--white); color: var(--primary-red); box-shadow: var(--shadow-soft); transform: translateY(-3px); }
+        .bcorp-logo-container {
+            text-align: center; padding: 30px; background: #fff;
+            border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #eee; width: 100%; max-width: 350px;
+        }
+        .bcorp-img-hd { width: 100%; height: auto; margin-bottom: 15px; object-fit: contain; }
+        .bcorp-caption { font-weight: 700; color: var(--text-dark); margin-bottom: 5px; font-size: 1rem;}
+
+        /* SLIDE 7: PESTEL */
+        #slide-7 { background-color: #f8f9fa; }
+        .pestel-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+        .pestel-box {
+            background: var(--white); padding: 25px; border-radius: 6px;
+            box-shadow: var(--shadow-soft); position: relative; overflow: hidden; border-top: 4px solid transparent;
+        }
+        .pestel-box:hover { transform: translateY(-5px); border-top-color: var(--primary-red); }
+        .pestel-big-letter {
+            position: absolute; top: -10px; right: 10px; font-size: 4rem; font-weight: 800;
+            color: rgba(0,0,0,0.04); font-family: 'Oswald', sans-serif; pointer-events: none;
+        }
+        .pestel-header h3 { font-size: 1.1rem; color: var(--text-dark); margin-bottom: 10px; }
+        .pestel-items li { margin-bottom: 8px; font-size: 0.85rem; list-style: none; position: relative; padding-left: 15px; }
+        .pestel-items li::before { content: '•'; color: var(--primary-red); position: absolute; left: 0; font-weight: bold; }
+        .pestel-box.opportunity { background: var(--primary-red); }
+        .pestel-box.opportunity h3, .pestel-box.opportunity li, .pestel-box.opportunity li::before { color: white; }
+        
+        .legal-citation { font-size: 0.65rem; color: #999; display: block; margin-top: 5px; font-style: italic; }
+        .legal-citation-link { color: #999; text-decoration: none; border-bottom: 1px dotted #ccc; transition:color 0.3s;}
+        .legal-citation-link:hover { color: var(--primary-red); }
+        
+        .pestel-box.opportunity .legal-citation { color: rgba(255,255,255,0.7); }
+
+        /* SLIDE 8: PORTER */
+        #slide-8 { background-color: var(--white); }
+        .porter-intro { font-size: 0.95rem; color: #666; margin-bottom: 25px; background: #f9f9f9; padding: 15px; border-left: 4px solid var(--text-dark); }
+        .porter-wrapper {
+            display: flex; flex-direction: column; gap: 20px; align-items: center; justify-content: center; height: 75%;
+        }
+        .porter-row-top { display: flex; gap: 20px; justify-content: center; width: 100%; }
+        .porter-row-bottom { display: flex; gap: 20px; justify-content: center; width: 100%; }
+
+        .porter-force {
+            flex: 1; max-width: 280px; text-align: center; background: white; padding: 20px 15px;
+            border-radius: 8px; box-shadow: var(--shadow-soft); border: 1px solid #eee; position: relative;
+        }
+        .porter-force.center { transform: scale(1.05); border-color: var(--primary-red); z-index: 5; }
+        .force-intensity {
+            display: inline-block; padding: 4px 10px; background: #333; color: white;
+            font-size: 0.7rem; font-weight: 700; border-radius: 4px; margin-bottom: 8px;
+        }
+        .force-intensity.high { background: var(--primary-red); }
+        .porter-force h3 { font-size: 1rem; margin-bottom: 8px; }
+        .porter-force p { font-size: 0.8rem; color: #555; line-height: 1.4; }
+
+        /* SLIDE 9: BENCHMARKING */
+        #slide-9 { background-color: #F0F2F5; }
+        .table-container { background: var(--white); border-radius: 8px; box-shadow: var(--shadow-soft); overflow: hidden; }
+        .bench-table { width: 100%; border-collapse: collapse; }
+        .bench-table th {
+            text-align: left; padding: 15px 20px; background-color: var(--dark-bg); color: var(--white);
+            font-family: 'Oswald', sans-serif; letter-spacing: 1px; font-size: 0.9rem;
+        }
+        .bench-table td { padding: 12px 20px; border-bottom: 1px solid #eee; font-size: 0.85rem; color: var(--text-medium); vertical-align: middle; }
+        
+        .row-gr { background-color: rgba(227, 38, 46, 0.05); border-left: 4px solid var(--primary-red); }
+        .row-gr .col-comp { color: var(--primary-red); font-weight: 800; }
+        .col-comp { font-weight: 700; color: var(--text-dark); }
+        .tag-comp { font-size: 0.7rem; background: #eee; padding: 2px 6px; border-radius: 4px; color: #666; margin-left: 5px; }
+
+        .conclusion-box {
+            margin-top: 25px; background-color: var(--dark-bg); color: var(--white); padding: 20px;
+            border-radius: 8px; display: flex; align-items: center; gap: 20px; box-shadow: var(--shadow-soft);
+        }
+        .conclusion-icon { font-size: 2rem; color: var(--primary-red); }
+        .conclusion-text h4 { color: var(--primary-red); margin-bottom: 5px; font-size: 1.1rem; }
+        .conclusion-text p { color: #f0f0f0 !important; font-size: 0.95rem; line-height: 1.5; }
+        .conclusion-text strong { color: #ffffff !important; font-weight: 700; }
+
+        /* SLIDE 10: REFERENCIAS (CORREGIDO) */
+        .biblio-list { list-style: none; margin-top: 30px; columns: 1; }
+        .biblio-item {
+            margin-bottom: 20px; 
+            padding-left: 60px; 
+            position: relative;
+            background: white; padding-top: 15px; padding-bottom: 15px; padding-right: 15px;
+            border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            min-height: 80px; display: flex; flex-direction: column; justify-content: center;
+        }
+        .biblio-item::before {
+            content: '\f0c1'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            color: var(--primary-red); 
+            position: absolute; left: 20px; top: 25px; 
+            font-size: 1.2rem;
+        }
+        .biblio-title { font-weight: 700; color: var(--text-dark); font-size: 0.95rem; display: block; margin-bottom: 5px; }
+        .biblio-source { font-style: italic; color: #666; font-size: 0.85rem; display: block; margin-bottom: 8px; }
+        .biblio-link { 
+            color: var(--primary-red); text-decoration: none; font-weight: 600; font-size: 0.8rem; 
+            word-break: break-all; display: block; background: #f9f9f9; padding: 5px; border-radius: 4px;
+        }
+        .biblio-link:hover { text-decoration: underline; background: #eee; }
+
+        @media (max-width: 1200px) {
+            .slide { padding: 40px; }
+            .roadmap-grid, .cards-container, .img-grid, .identity-layout, .pestel-container, .split-container {
+                flex-direction: column; grid-template-columns: 1fr;
+            }
+            .split-left, .split-right { width: 100%; height: auto; padding: 40px 30px; }
+            .porter-row-top, .porter-row-bottom { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <div class="article-container">
-        <span class="kicker">Demografía & Sociedad</span>
-        <h1>Italia cada día más vacía: El silencio en los parques</h1>
-        <p class="lead">El frío demográfico deja un paisaje melancólico. Los nacimientos han caído un 34% en los últimos 15 años, transformando los espacios de juego en escenarios de ausencia.</p>
+    <div class="slider-container">
         
-        <div class="byline">
-            <span>Por <strong>Luca Ciampichini Mauro</strong></span>
-            <span>Diciembre 2025</span>
+        <div class="logo-gr">
+             <img class="logo-img-dynamic" src="https://www.goodrebels.com/wp-content/uploads/2022/11/cropped-cropped-favicon.png" alt="GR Logo">
         </div>
 
-        <div class="flourish-embed flourish-chart" data-src="visualisation/26956274">
-            <script src="https://public.flourish.studio/resources/embed.js"></script>
-            <noscript>
-                <img src="https://public.flourish.studio/visualisation/26956274/thumbnail" width="100%" alt="chart visualization" />
-            </noscript>
+        <div class="slide active" id="slide-1">
+            <div class="slide-1-content">
+                <span class="tag">Plan de Negocio: Caso Práctico</span>
+                <h1 class="main-title">GOOD<br>REBELS</h1>
+                <div class="sub-title">
+                    Análisis Estratégico y Financiero de una<br>
+                    Agencia "Human-Centred".
+                </div>
+            </div>
         </div>
 
-        <div class="footer-note">
-            Fuente de datos: ISTAT (2008-2023) | Imagen generada mediante IA generativa | Visualización: Flourish
+        <div class="slide" id="slide-2">
+            <h2>ÍNDICE DE CONTENIDOS</h2>
+            <div class="roadmap-grid">
+                <div>
+                    <a class="roadmap-item" onclick="goToSlide(3)">
+                        <span class="roadmap-number">01</span><span>Sumario Ejecutivo</span>
+                    </a>
+                    <a class="roadmap-item" onclick="goToSlide(4)">
+                        <span class="roadmap-number">02</span><span>Información Básica y Trámites</span>
+                    </a>
+                    <a class="roadmap-item" onclick="goToSlide(5)">
+                        <span class="roadmap-number">03</span><span>Plan Estratégico (Identidad/Entorno)</span>
+                    </a>
+                     <a class="roadmap-item future">
+                        <span class="roadmap-number">3.3</span><span>Análisis DAFO y Ventaja Competitiva</span>
+                    </a>
+                    <a class="roadmap-item future">
+                        <span class="roadmap-number">04</span><span>Plan de Marketing</span>
+                    </a>
+                </div>
+                <div>
+                     <a class="roadmap-item future">
+                        <span class="roadmap-number">05</span><span>Operaciones y Producción</span>
+                    </a>
+                     <a class="roadmap-item future">
+                        <span class="roadmap-number">06</span><span>Organización y Dirección (RRHH)</span>
+                    </a>
+                    <a class="roadmap-item future">
+                        <span class="roadmap-number">07</span><span>Plan Financiero (Balance/PyG)</span>
+                    </a>
+                     <a class="roadmap-item future">
+                        <span class="roadmap-number">08</span><span>Calendario y Conclusiones</span>
+                    </a>
+                    <a class="roadmap-item" onclick="goToSlide(9)">
+                        <span class="roadmap-number">10</span><span>Referencias Bibliográficas</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <h2>JUSTIFICACIÓN DE LA ELECCIÓN</h2>
+            <div class="cards-container">
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-globe-europe"></i></div>
+                    <h3>DE ESPAÑA AL MUNDO</h3>
+                    <p>Un caso de adaptación real: Rebranding estratégico para saltar del mercado local español y competir en el mercado anglosajón (UK).</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-fingerprint"></i></div>
+                    <h3>DIGITAL 360º "HUMAN"</h3>
+                    <p>No es solo tecnología. Su modelo integra servicios digitales completos (360º) con una obsesión por el factor humano y las personas.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-database"></i></div>
+                    <h3>DATOS REALES "OPEN"</h3>
+                    <p>Su filosofía "Open Business" nos permite acceso a métricas reales, salarios y cultura interna, evitando suposiciones teóricas.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <h2>1. SUMARIO EJECUTIVO</h2>
+            <div class="img-grid">
+                <div class="img-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Especialización">
+                    <div class="overlay">
+                        <h3>1. MARGEN SOBRE VOLUMEN</h3>
+                        <p>Estrategia de híper-especialización en servicios de alto valor (Data, UX) evitando la "commodities" publicitaria de bajo precio.</p>
+                    </div>
+                </div>
+                <div class="img-card">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" alt="Talento">
+                    <div class="overlay">
+                        <h3>2. RETENCIÓN DE CAPITAL HUMANO</h3>
+                        <p>La cultura radical reduce drásticamente la rotación de personal, el mayor coste operativo en una empresa de servicios.</p>
+                    </div>
+                </div>
+                <div class="img-card">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="Expansión">
+                    <div class="overlay">
+                        <h3>3. SOLVENCIA FINANCIERA</h3>
+                        <p>Crecimiento orgánico sostenido y autofinanciado, manteniendo la independencia de accionistas externos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <div class="split-container">
+                <div class="split-left">
+                    <h2 style="color:white; font-size:1.8rem; margin-bottom:40px; border:none; padding:0;">2. INFORMACIÓN BÁSICA</h2>
+                    
+                    <div class="info-block-lg">
+                        <div class="info-label-lg">2.1. Personalidad Jurídica</div>
+                        <div class="info-title-lg">Sociedad Limitada (S.L.)</div>
+                        <p>
+                            <strong>Identificación Fiscal (NIF):</strong> Comienza por la letra <strong>"B"</strong>.
+                        </p>
+                        <p style="margin-top:5px; font-size:0.85rem;">
+                            Esta nomenclatura fiscal (B-81...) certifica legalmente su naturaleza como <em>Sociedad de Responsabilidad Limitada</em>. La letra "B" identifica a las S.L. según la normativa vigente, separando el patrimonio de los socios de las deudas de la empresa.
+                        </p>
+                        <a href="https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/guia-practica-cumplimentacion-modelo-censal-036/anexos/anexo-01-solicitud-nif-documentacion-aportar/informacion-sobre-numero-identificacion-fiscal/composicion-nif/personas-juridicas-entidades.html" 
+                           target="_blank" 
+                           style="display:inline-block; margin-top:8px; font-size:0.7rem; color:#aaa; text-decoration:none; border-bottom:1px dotted #777;">
+                           <i class="fas fa-external-link-alt" style="margin-right:5px; font-size:0.6rem;"></i>
+                           Fuente: AEAT - Composición NIF Personas Jurídicas
+                        </a>
+                        <br>
+                        <a href="https://www.einforma.com/informacion-empresa/good-rebels-tech" 
+                           target="_blank" 
+                           style="display:inline-block; margin-top:4px; font-size:0.7rem; color:#aaa; text-decoration:none; border-bottom:1px dotted #777;">
+                           <i class="fas fa-external-link-alt" style="margin-right:5px; font-size:0.6rem;"></i>
+                           Fuente NIF: eInforma - Good Rebels Tech
+                        </a>
+                    </div>
+                    
+                    <div class="info-block-lg">
+                        <div class="info-label-lg">2.2. Razón Social y Marca</div>
+                        <div class="info-title-lg">Good Rebels S.L.</div>
+                        <p>
+                            <strong>Razón Social original:</strong> Territorio Creativo S.L.<br>
+                            <strong>Nombre Comercial actual:</strong> "Good Rebels".
+                        </p>
+                        <p style="margin-top:10px; font-size:0.85rem; border-left: 2px solid #E3262E; padding-left:10px;">
+                            <em>Nota estratégica:</em> El cambio de denominación social en 2017 no fue solo estético, sino un trámite legal necesario para operar bajo una marca única global en Reino Unido y México.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="split-right">
+                    <div class="split-content-right">
+                        <div class="info-block-lg" style="border-color: rgba(255,255,255,0.6);">
+                            <div class="info-label-lg" style="color:white;">Trámites Destacados</div>
+                            <div class="info-title-lg">Estatutos B Corp</div>
+                            <p style="color:#eee; margin-top:10px; font-size:1.1rem;">Certificación legal de impacto (2019).</p>
+                            <p style="color:#ddd; margin-top:5px; font-size:0.9rem;">
+                                Good Rebels modificó sus estatutos ante notario para blindar legalmente su misión social, obligando a los administradores a considerar el impacto social en cada decisión financiera.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <h2>3.1 IDENTIDAD CORPORATIVA</h2>
+            
+            <div class="identity-layout">
+                <div class="identity-content">
+                    <div class="mission-vision-box">
+                        <h3>MISIÓN</h3>
+                        <p>"Construir organizaciones más humanas y centradas en las personas a través de la tecnología."</p>
+                    </div>
+                    <div class="mission-vision-box" style="border-bottom:none;">
+                        <h3>VISIÓN</h3>
+                        <p>Ser el referente global del "Human-Centred Business", demostrando que poner a las personas primero es más rentable.</p>
+                    </div>
+
+                    <div class="values-grid">
+                        <div class="value-pill">Radical Transparency</div>
+                        <div class="value-pill">Lead with Love</div>
+                        <div class="value-pill">Autonomía</div>
+                        <div class="value-pill">Rebeldía Constructiva</div>
+                    </div>
+                </div>
+
+                <div class="identity-visual-col">
+                    <div class="bcorp-logo-container">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0MwJb6EERd6mlzR8XDYHgHQcdJbPN10sgHA&s" class="bcorp-img-hd" alt="B Corp Logo">
+                        <div class="bcorp-caption">Sello de Identidad</div>
+                        <div class="bcorp-sub" style="font-size:0.8rem; color:#666;">Valida externamente su posicionamiento "Rebelde" y ético frente al mercado tradicional.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <h2>3.2.1 MACROENTORNO (PESTEL)</h2>
+            <div class="pestel-container">
+                <div class="pestel-box">
+                    <span class="pestel-big-letter">P</span>
+                    <div class="pestel-header"><h3>POLÍTICO / LEGAL</h3></div>
+                    <ul class="pestel-items">
+                        <li>Regulación IA (EU AI Act): Barrera de entrada para competidores low-cost.</li>
+                        <li>Leyes privacidad estrictas (GDPR).</li>
+                        <li>Ley Crea y Crece (Facturación elect.).</li>
+                    </ul>
+                    <div style="margin-top:10px;">
+                        <span class="legal-citation">[Fuente: Guía UE AI Act para PYMES]</span>
+                        <a href="https://artificialintelligenceact.eu/es/small-businesses-guide-to-the-ai-act/" target="_blank" class="legal-citation-link" style="font-size:0.6rem;">
+                            <i class="fas fa-external-link-alt"></i> Ver normativa de costes de cumplimiento
+                        </a>
+                    </div>
+                </div>
+                <div class="pestel-box">
+                    <span class="pestel-big-letter">E</span>
+                    <div class="pestel-header"><h3>ECONÓMICO</h3></div>
+                    <ul class="pestel-items">
+                        <li>Inflación salarial estructural (Guerra de Talento Tech).</li>
+                        <li>Concentración del sector (Fusiones).</li>
+                    </ul>
+                    <span class="legal-citation">[Fuente: INE / Convenios Colectivos]</span>
+                </div>
+                <div class="pestel-box opportunity">
+                    <span class="pestel-big-letter">S</span>
+                    <div class="pestel-header"><h3>SOCIO-CULTURAL</h3></div>
+                    <ul class="pestel-items">
+                        <li>Demanda de marcas éticas.</li>
+                        <li>Talento exige teletrabajo y propósito.</li>
+                    </ul>
+                    <span class="legal-citation">[Fuente: Informes Tendencias]</span>
+                </div>
+                <div class="pestel-box">
+                    <span class="pestel-big-letter">T</span>
+                    <div class="pestel-header"><h3>TECNOLÓGICO</h3></div>
+                    <ul class="pestel-items">
+                        <li>IA Generativa disruptiva.</li>
+                        <li>Automatización (MarTech).</li>
+                    </ul>
+                </div>
+                <div class="pestel-box">
+                    <span class="pestel-big-letter">E</span>
+                    <div class="pestel-header"><h3>ECOLÓGICO</h3></div>
+                    <ul class="pestel-items">
+                        <li>Huella de carbono digital.</li>
+                        <li>Criterios ESG en concursos públicos.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <h2>3.2.2 MICROENTORNO (5 FUERZAS)</h2>
+            <p class="porter-intro">Análisis del atractivo del sector basado en la saturación de agencias y la escasez de talento digital.</p>
+            
+            <div class="porter-wrapper">
+                <div class="porter-row-top">
+                    <div class="porter-force">
+                        <span class="force-intensity high">PODER ALTO</span>
+                        <h3>PROVEEDORES (TALENTO)</h3>
+                        <p>El "proveedor" clave es el talento tecnológico. Su escasez les da alto poder de negociación salarial.</p>
+                    </div>
+                    <div class="porter-force center">
+                        <span class="force-intensity high" style="background:var(--primary-red);">RIVALIDAD ALTA</span>
+                        <h3>COMPETENCIA ACTUAL</h3>
+                        <p>Mercado saturado (+50 agencias relevantes). Guerra de precios en servicios commodities.</p>
+                    </div>
+                    <div class="porter-force">
+                        <span class="force-intensity high">PODER ALTO</span>
+                        <h3>CLIENTES (IBEX35)</h3>
+                        <p>Grandes cuentas concentran la facturación e imponen plazos de pago largos (60-90 días).</p>
+                    </div>
+                </div>
+
+                <div class="porter-row-bottom">
+                     <div class="porter-force">
+                        <span class="force-intensity">AMENAZA MEDIA</span>
+                        <h3>NUEVOS ENTRANTES</h3>
+                        <p>Barreras de entrada bajas para pequeñas agencias, pero altas para competir por grandes cuentas (credibilidad).</p>
+                    </div>
+                    <div class="porter-force">
+                        <span class="force-intensity high">AMENAZA ALTA</span>
+                        <h3>PRODUCTOS SUSTITUTIVOS</h3>
+                        <p>Internalización (In-house) de equipos de marketing en clientes y herramientas de IA que automatizan la producción.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-9">
+            <h2>3.2.3 BENCHMARKING COMPETITIVO</h2>
+            <p style="margin-bottom:20px; color:#555;">Comparativa con líderes del Ranking Marketing4Ecommerce.</p>
+            
+            <div class="table-container">
+                <table class="bench-table">
+                    <thead>
+                        <tr>
+                            <th>EMPRESA</th>
+                            <th>TIPO / ORIGEN</th>
+                            <th>ENFOQUE PRINCIPAL</th>
+                            <th>DIFERENCIADOR GOOD REBELS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-gr">
+                            <td class="col-comp">GOOD REBELS</td>
+                            <td>Independiente (S.L.) <br> <span class="tag-comp">Nativa Digital</span></td>
+                            <td><strong>Digital 360º + Cultura</strong></td>
+                            <td>- (Referencia)</td>
+                        </tr>
+                        <tr>
+                            <td class="col-comp">LLYC</td>
+                            <td>Cotizada (BME Growth) <br> <span class="tag-comp">Consultora</span></td>
+                            <td>Reputación y M&A.</td>
+                            <td>Agilidad (GR) vs Burocracia corporativa (LLYC).</td>
+                        </tr>
+                        <tr>
+                            <td class="col-comp">OGILVY</td>
+                            <td>Multinacional (WPP) <br> <span class="tag-comp">Publicidad</span></td>
+                            <td>Creatividad Masiva (TV).</td>
+                            <td>Independencia (GR) vs Holding Financiero (WPP).</td>
+                        </tr>
+                        <tr>
+                            <td class="col-comp">ATREVIA</td>
+                            <td>Independiente <br> <span class="tag-comp">Prensa/PR</span></td>
+                            <td>Relaciones Públicas.</td>
+                            <td>ADN Tecnológico (GR) vs ADN Prensa (Atrevia).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="conclusion-box">
+                <div class="conclusion-icon"><i class="fas fa-lightbulb"></i></div>
+                <div class="conclusion-text">
+                    <h4>POSICIONAMIENTO "OCÉANO AZUL"</h4>
+                    <p>Good Rebels ocupa un espacio híbrido único: posee la capacidad técnica de las grandes consultoras (Accenture) pero mantiene la agilidad y cultura cercana de las boutiques creativas independientes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-10">
+            <h2>REFERENCIAS BIBLIOGRÁFICAS</h2>
+            <ul class="biblio-list">
+                <li class="biblio-item">
+                    <span class="biblio-title">Marketing4Ecommerce - Ranking de Agencias de Comunicación en España</span>
+                    <span class="biblio-source">Fuente utilizada para selección de competidores (Benchmarking).</span>
+                    <a href="https://marketing4ecommerce.net/mejores-agencias-de-comunicacion-y-pr-en-espana/" target="_blank" class="biblio-link">https://marketing4ecommerce.net/mejores-agencias-de-comunicacion-y-pr-en-espana/</a>
+                </li>
+                <li class="biblio-item">
+                    <span class="biblio-title">InfoAdex 2025 - Estudio de la Inversión Publicitaria en España</span>
+                    <span class="biblio-source">Datos de saturación del mercado y presión competitiva.</span>
+                    <a href="https://infoadex.es/estudio-infoadex-de-la-inversion-publicitaria-en-espana-2025/" target="_blank" class="biblio-link">https://infoadex.es/estudio-infoadex-de-la-inversion-publicitaria-en-espana-2025/</a>
+                </li>
+                <li class="biblio-item">
+                    <span class="biblio-title">Good Rebels: Open Business (Transparencia)</span>
+                    <span class="biblio-source">Portal de transparencia con salarios y cuentas anuales de Good Rebels.</span>
+                    <a href="https://www.goodrebels.com/es/conoce-good-rebels/" target="_blank" class="biblio-link">https://www.goodrebels.com/es/conoce-good-rebels/</a>
+                </li>
+                <li class="biblio-item">
+                    <span class="biblio-title">B Lab Global - Directorio de Empresas B Corp</span>
+                    <span class="biblio-source">Verificación oficial de la certificación y estatus legal ético.</span>
+                    <a href="https://www.bcorporation.net/en-us/find-a-b-corp/company/good-rebels-territorio-creativo-sl/" target="_blank" class="biblio-link">https://www.bcorporation.net/en-us/find-a-b-corp/company/good-rebels-territorio-creativo-sl/</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="controls">
+            <button class="btn-nav btn-prev" onclick="prevSlide()"><i class="fas fa-arrow-left"></i></button>
+            <button class="btn-nav btn-next" onclick="nextSlide()"><i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
 
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentSlide = index;
+                updateSlides();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "ArrowRight") nextSlide();
+            if (event.key === "ArrowLeft") prevSlide();
+        });
+    </script>
 </body>
 </html>
-
